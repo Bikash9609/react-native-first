@@ -68,23 +68,6 @@ class HomeScreen extends Component {
 					<Card />
 					<Card />
 				</Content>
-
-				<Footer>
-					<FooterTab style={styles.footer}>
-						<Button active>
-							<Icon active name="apps" />
-						</Button>
-						<Button>
-							<Icon name="camera" />
-						</Button>
-						<Button>
-							<Icon name="navigate" />
-						</Button>
-						<Button>
-							<Icon name="person" />
-						</Button>
-					</FooterTab>
-				</Footer>
 			</Container>
 		);
 	}
