@@ -1,7 +1,8 @@
 import {StyleSheet} from 'react-native';
+import colors from '../styles/components/colors';
 
 export const MainContent = StyleSheet.create({
-  Wrapper: {
+  wrapper: {
     height: '100%',
     width: '100%',
     opacity: 1,
@@ -10,25 +11,28 @@ export const MainContent = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#ccc',
   },
-  Content: {
+  //Auth mode buttons
+  buttonsWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    // backgroundColor: '#148bcf',
     flexWrap: 'wrap',
-
     width: '100%',
-    height: '100%',
+    paddingBottom: 20,
     paddingTop: 20,
-    borderRadius: 30,
-    borderTopEndRadius: 30,
-    borderTopStartRadius: 30,
-  },
-
-  Header: {
-    width: '100%',
-    textAlign: 'center',
     paddingVertical: 20,
-    fontSize: 19,
+    paddingHorizontal: 10,
+    // borderRadius: 30,
+    // borderTopEndRadius: 30,
+    // borderTopStartRadius: 30,
+    // bottom: 0,
+  },
+  // Auth screen text
+  mainText: {
+    fontSize: 60,
+    fontWeight: '700',
+    marginBottom: 50,
+    color: 'rgba(0, 0, 0, 0.9)',
   },
 });

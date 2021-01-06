@@ -1,11 +1,14 @@
 import React from 'react';
-import {StyleSheet, ImageBackground, Image} from 'react-native';
+import {
+  StyleSheet,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {
   Body,
   Container,
   Content,
-  Header,
-  Left,
   Text,
   Title,
   View,
@@ -14,14 +17,16 @@ import {
   Right,
 } from 'native-base';
 import {LinearGradient} from 'expo-linear-gradient';
+import {AntDesign} from '@expo/vector-icons';
 
 import {buttonStyles} from '../../styles/components/index';
 import {MainContent} from '../../styles/auth-styles';
 import Carousel from 'react-native-snap-carousel';
 import Card from '../../components/card/Card';
+import {primaryColor, secondaryColor} from '../../styles/components/colors';
 
-import Logo from '../../assets/images/AuthScreen/Logo_Nav.png';
-import {log} from 'react-native-reanimated';
+const LOGO_URL =
+  'https://res.cloudinary.com/seconde/image/upload/v1609942436/temp/Markar_Logo_500x500_Without_slogan_Text_HOLLOW_Transparent_k0n5kl.png';
 
 const auth = ({navigation}) => {
   let data = [
@@ -37,10 +42,10 @@ const auth = ({navigation}) => {
           uri:
             'https://cdn.pixabay.com/photo/2013/12/13/21/13/plumber-228010_960_720.jpg',
         }}
-        blurRadius={0.5}
+        blurRadius={1}
         resizeMode="cover"
         width="100%"
-        style={MainContent.Wrapper}>
+        style={MainContent.wrapper}>
         <View
           style={{
             height: '100%',
@@ -51,46 +56,78 @@ const auth = ({navigation}) => {
           }}>
           <LinearGradient
             // Background Linear Gradient
-
-            colors={['rgba(255, 255, 255, 0.1)', 'rgba(255, 136, 0, 0.9)']}
-            style={styles.background}>
-            <View style={{height: '45%', justifyContent: 'center'}}>
+            colors={['rgba(255, 255, 255,1)', primaryColor]}
+            style={{
+              justifyContent: 'space-between',
+              flex: 1,
+            }}>
+            <View
+              style={{
+                justifyContent: 'center',
+                maxHeight: '60%',
+                padding: 20,
+                alignItems: 'flex-start',
+              }}>
               <Image
                 source={{
-                  uri:
-                    'https://res.cloudinary.com/seconde/image/upload/v1609831952/Temp/200x47_Logo_Nav_nl26wf.png',
+                  uri: LOGO_URL,
                 }}
                 width={'100%'}
                 style={{
                   padding: 0,
                   resizeMode: 'contain',
-                  width: 127,
-                  height: '50%',
-                  alignSelf: 'center',
+                  width: '40%',
+                  height: '100%',
+                  // alignSelf: 'flex-start',
                 }}
-                // height="100%"
+                height="100%"
               />
+              <Text selectable={false} style={MainContent.mainText}>
+                Home services from locals around you
+              </Text>
             </View>
 
-            <View style={{height: '100%'}}>
-              <View style={MainContent.Content}>
-                <Text style={MainContent.Header}>
-                  Home services from locals around you.
-                </Text>
+            <View style={{}}>
+              <View style={MainContent.buttonsWrapper}>
+                <Button
+                  style={{
+                    ...buttonStyles.primary,
+                    width: '100%',
+                    paddingTop: 30,
+                    paddingBottom: 30,
+                  }}
+                  iconLeft
+                  activeOpacity={0.9}
+                  full>
+                  <AntDesign name="mail" size={24} color={primaryColor} />
 
-                <Button style={buttonStyles.primary} activeOpacity={0.8}>
-                  <Text style={{color: 'orange', fontWeight: 'bold'}}>
-                    Login
+                  <Text
+                    style={{
+                      color: primaryColor,
+                      fontWeight: 'bold',
+                      textAlign: 'center',
+                    }}>
+                    Continue with Email
                   </Text>
                 </Button>
 
-                <Button style={buttonStyles.primary} activeOpacity={0.8}>
-                  <Text style={{color: 'orange', fontWeight: 'bold'}}>
-                    Sign up{' '}
-                  </Text>
-                </Button>
-                <Button style={buttonStyles.primary} activeOpacity={0.8} full>
-                  <Text style={{color: 'orange', fontWeight: 'bold'}}>
+                <Button
+                  style={{
+                    ...buttonStyles.primary,
+                    width: '100%',
+                    paddingTop: 30,
+                    paddingBottom: 30,
+                  }}
+                  iconLeft
+                  activeOpacity={0.9}
+                  full>
+                  <AntDesign name="google" size={24} color={primaryColor} />
+                  <Text
+                    style={{
+                      color: primaryColor,
+                      fontWeight: 'bold',
+                      textAlign: 'center',
+                    }}>
                     Connect with Google
                   </Text>
                 </Button>

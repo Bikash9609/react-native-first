@@ -27,11 +27,15 @@ const UnAuthStack = () => {
 
 const HomeScreenStack = () => {
   return (
-    <Navigator
-      headerMode="none"
-      initialRouteName="Login"
-      screenOptions={{animationEnabled: true}}>
+    <Navigator headerMode="none" screenOptions={{animationEnabled: true}}>
       <Screen name="Home" component={HomeScreen} />
+    </Navigator>
+  );
+};
+
+const AuthScreenStack = () => {
+  return (
+    <Navigator headerMode="none">
       <Screen name="Login" component={AuthScreen} />
     </Navigator>
   );
@@ -73,11 +77,16 @@ function MyTabs() {
   return (
     <NavigationContainer>
       <Navigator
-        initialRouteName="Home"
+        initialRouteName="Login"
         tabBarOptions={{keyboardHidesTabBar: true}}>
         <Screen
           name="Home"
           component={HomeScreenStack}
+          options={{...options, headerShown: false, tabBarVisible: false}}
+        />
+        <Screen
+          name="Login"
+          component={AuthScreenStack}
           options={{...options, headerShown: false, tabBarVisible: false}}
         />
         <Screen
