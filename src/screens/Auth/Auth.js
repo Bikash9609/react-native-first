@@ -42,7 +42,7 @@ const auth = ({navigation}) => {
           uri:
             'https://cdn.pixabay.com/photo/2013/12/13/21/13/plumber-228010_960_720.jpg',
         }}
-        blurRadius={1}
+        blurRadius={0.1}
         resizeMode="cover"
         width="100%"
         style={MainContent.wrapper}>
@@ -56,11 +56,12 @@ const auth = ({navigation}) => {
           }}>
           <LinearGradient
             // Background Linear Gradient
-            colors={['rgba(255, 255, 255,1)', primaryColor]}
+            colors={['rgba(255, 255, 255,0.6)', primaryColor]}
             style={{
               justifyContent: 'space-between',
               flex: 1,
-            }}>
+            }}
+            start={{x: 0.2, y: 0.3}}>
             <View
               style={{
                 justifyContent: 'center',
