@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 import "react-native-gesture-handler";
 
 import { Text, View } from "native-base";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { NavigationContainer, DefaultThemem } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntIcons from "react-native-vector-icons/AntDesign";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import ComponentScreen from "./src/screens/ComponentScreen";
 import ListScreen from "./src/screens/ListScreen";
+import AuthScreen from "./src/screens/Auth";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,28 +21,64 @@ function MyTabs() {
 			<Navigator
 				tabBarOptions={{
 					allowFontScaling: true,
-					activeTintColor: "rgba(0,0,0,0.7)",
-
+					activeTintColor: "orange",
 					adaptive: true,
 					showLabel: false,
+					keyboardHidesTabBar: true,
+
 					iconStyle: styles.footerIcons,
 				}}
 			>
 				<Screen
-					name="Home"
+					name="Auth"
+					component={AuthScreen}
 					options={{
+						tabBarLabel: "Auth",
+						tabBarVisible: false,
 						tabBarIcon: (focused, color, size) => (
-							<AntIcons name="home" size={32} color={color} />
+							<AntIcons
+								name="lock"
+								size={32}
+								color={
+									focused
+										? styles.activeFooterIcons.color
+										: styles.footerIcons.color
+								}
+							/>
 						),
 					}}
+				/>
+				<Screen
+					name="Home"
 					component={HomeScreen}
+					options={{
+						tabBarIcon: (focused, color, size) => (
+							<AntIcons
+								name="home"
+								size={32}
+								color={
+									focused
+										? styles.activeFooterIcons.color
+										: styles.footerIcons.color
+								}
+							/>
+						),
+					}}
 				/>
 				<Screen
 					name="List"
 					component={ListScreen}
 					options={{
 						tabBarIcon: (focused, color, size) => (
-							<AntIcons name="setting" size={32} color={color} />
+							<AntIcons
+								name="setting"
+								size={32}
+								color={
+									focused
+										? styles.activeFooterIcons.color
+										: styles.footerIcons.color
+								}
+							/>
 						),
 					}}
 				/>
@@ -52,7 +89,10 @@ function MyTabs() {
 
 const styles = StyleSheet.create({
 	footerIcons: {
-		color: "#fff",
+		color: "#858282",
+	},
+	activeFooterIcons: {
+		color: "orange",
 	},
 });
 
