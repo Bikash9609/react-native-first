@@ -36,3 +36,12 @@ export const MainContent = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.9)',
   },
 });
+
+export const EmailAuthStyles = StyleSheet.create({
+  header: {
+    backgroundColor: '#fff',
+  },
+  tabs: {
+    backgroundColor: '#fff',
+  },
+});

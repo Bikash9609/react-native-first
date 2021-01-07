@@ -13,6 +13,9 @@ import HomeScreen from './src/screens/HomeScreen';
 import ComponentScreen from './src/screens/ComponentScreen';
 import ListScreen from './src/screens/ListScreen';
 import AuthScreen from './src/screens/Auth';
+import EmailAuth from './src/screens/Auth/Email-Auth';
+
+import {primaryColor, secondaryColor} from './src/styles/components/colors';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -35,8 +38,21 @@ const HomeScreenStack = () => {
 
 const AuthScreenStack = () => {
   return (
-    <Navigator headerMode="none">
-      <Screen name="Login" component={AuthScreen} />
+    <Navigator
+      headerMode="screen"
+      screenOptions={{
+        animationEnabled: true,
+      }}>
+      <Screen
+        name="Login"
+        component={AuthScreen}
+        options={{headerShown: false}}
+      />
+      <Screen
+        name="Email Auth"
+        component={EmailAuth}
+        options={{headerShown: false}}
+      />
     </Navigator>
   );
 };

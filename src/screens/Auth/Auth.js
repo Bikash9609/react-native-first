@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, ImageBackground, Image, StatusBar} from 'react-native';
 import {
   Body,
   Container,
@@ -21,7 +16,6 @@ import {AntDesign} from '@expo/vector-icons';
 
 import {buttonStyles} from '../../styles/components/index';
 import {MainContent} from '../../styles/auth-styles';
-import Carousel from 'react-native-snap-carousel';
 import Card from '../../components/card/Card';
 import {primaryColor, secondaryColor} from '../../styles/components/colors';
 
@@ -29,14 +23,9 @@ const LOGO_URL =
   'https://res.cloudinary.com/seconde/image/upload/v1609942436/temp/Markar_Logo_500x500_Without_slogan_Text_HOLLOW_Transparent_k0n5kl.png';
 
 const auth = ({navigation}) => {
-  let data = [
-    {name: 'Title', item: 'one'},
-    {name: 'Title2', item: 'one2'},
-    {name: 'Title4', item: 'one3'},
-  ];
-
   return (
     <Container>
+      <StatusBar backgroundColor={primaryColor} barStyle={'dark-content'} />
       <ImageBackground
         source={{
           uri:
@@ -56,12 +45,16 @@ const auth = ({navigation}) => {
           }}>
           <LinearGradient
             // Background Linear Gradient
-            colors={['rgba(255, 255, 255,0.6)', primaryColor]}
+            colors={[
+              'rgba(255, 255, 255, 1)',
+              'rgba(255, 255, 255,0.6)',
+              primaryColor,
+            ]}
             style={{
               justifyContent: 'space-between',
               flex: 1,
             }}
-            start={{x: 0.2, y: 0.3}}>
+            start={{x: 0.01, y: 0.2, z: 0.6}}>
             <View
               style={{
                 justifyContent: 'center',
@@ -91,6 +84,7 @@ const auth = ({navigation}) => {
             <View style={{}}>
               <View style={MainContent.buttonsWrapper}>
                 <Button
+                  onPress={() => navigation.navigate('Email Auth')}
                   style={{
                     ...buttonStyles.primary,
                     width: '100%',
