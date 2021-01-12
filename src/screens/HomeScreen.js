@@ -1,145 +1,225 @@
 import React, {Component} from 'react';
 import {
-  Text,
   StyleSheet,
   View,
   TouchableOpacity,
   ScrollView,
+  Image,
+  FlatList,
+  SafeAreaView,
 } from 'react-native';
 import {
   Container,
   Button,
-  Footer,
-  FooterTab,
   Icon,
   Header,
-  Left,
   Body,
-  Title,
   Right,
   Item,
   Input,
+  Left,
+  Text,
+  Col,
 } from 'native-base';
-import Card from '../components/card/Card';
+import {LinearGradient} from 'expo-linear-gradient';
+import {FlatGrid} from 'react-native-super-grid';
+import Ripple from 'react-native-material-ripple';
 
-// import Carousel from '../components/carousel/carousel';
+// ICONS
+import {Ionicons} from '@expo/vector-icons';
 
-const styles = StyleSheet.create({
-  Container: {
-    backgroundColor: '#eee',
-  },
-  footer: {
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderTopWidth: 1,
-  },
-  main: {
-    // height: "93%",
-  },
-  text: {
-    fontSize: 21,
-    padding: 10,
-    fontWeight: '400',
-    textAlign: 'center',
-  },
-  button: {
-    padding: 7,
-    textAlign: 'center',
-    backgroundColor: 'red',
-    marginHorizontal: 5,
-    marginVertical: 5,
-    borderRadius: 40,
-    width: '40%',
-    fontSize: 19,
-    color: '#fff',
-  },
-  header: {
-    backgroundColor: 'orange',
-    height: 100,
-    elevation: 0,
-    zIndex: 11,
-  },
-  SearchBar: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: -20,
-    backgroundColor: '#fff',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    color: '#ccc',
-    borderRadius: 10,
-    elevation: 20,
-    zIndex: 1111,
-  },
-  ViewHeader: {
-    // flex: 1,
-    width: '100%',
-  },
-  HeaderSearch: {
-    color: 'rgba(0,0,0,0.7)',
-  },
-  Content: {
-    marginTop: 10,
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingTop: 10,
-    paddingHorizontal: 10,
-    height: '100%',
-  },
-});
+// STYLES
+import {
+  lightTheme,
+  primaryColor,
+  secondaryColor,
+} from '../styles/components/colors';
+import {homeStyles} from '../styles/screens/home-screen';
+import {text} from '../styles/globals';
+
+// COMPONENTS
+import {OnlyImageCard, CustomCard} from '../components/card/Card';
+
+// CONSTATNS
+import {urls} from '../constants/Globals';
+import {home} from '../constants/screens/home-screen';
+import {color} from 'react-native-reanimated';
 
 class HomeScreen extends Component {
-  navigationOptions = {
-    headerShown: true,
+  state = {
+    heightFromTop: 0,
+  };
+
+  handleScroll = (event) => {
+    const layout = event.nativeEvent.contentOffset.y;
+    console.log(layout);
+    this.setState({heightFromTop: layout});
   };
 
   render() {
     const {navigate} = this.props.navigation;
-    return (
-      <Container style={styles.Container}>
-        <Header
-          androidStatusBarColor="orange"
-          rounded
-          noLeft
-          style={styles.header}>
-          <Left>
-            <Button transparent>
-              <Icon name="arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name="heart" />
-            </Button>
-            <Button transparent>
-              <Icon name="menu" onPress={() => navigate('Login')} />
-            </Button>
-          </Right>
-        </Header>
-        <View style={styles.ViewHeader}>
-          <Item style={styles.SearchBar}>
-            <Input placeholder="Search" style={styles.HeaderSearch} />
-            <Icon name="ios-search" />
-          </Item>
-        </View>
+    const data = [
+      {imageUrl: home.doctor, title: 'Doctor'},
+      {imageUrl: home.electrician, title: 'Electrician'},
+      {imageUrl: home.tilesWork, title: 'Tiles Worker'},
+      {imageUrl: home.tutor, title: 'Tutor'},
+      {imageUrl: home.plumber, title: 'Plumber'},
+      {imageUrl: home.architect, title: 'Architect'},
+      {imageUrl: home.tutor, title: 'Tutor'},
+      {imageUrl: home.architect, title: 'Architect'},
+      {imageUrl: home.plumber, title: 'Plumber'},
+    ];
 
-        <View style={styles.Content}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            horizontal={false}
-            style={{borderRadius: 30, borderColor: '#eee ', flex: 1}}>
-            <Text style={styles.text}>Service at your door step</Text>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </ScrollView>
+    return (
+      <Container style={{backgroundColor: 'transparent'}}>
+        {/* Header */}
+        <View
+          style={{
+            position: 'absolute',
+            zIndex: 111,
+            width: '100%',
+            backgroundColor: 'transparent',
+          }}>
+          <LinearGradient
+            colors={['rgba(255, 255, 255, 1)', primaryColor]}
+            end={[1.3, 0.7]}>
+            <Header
+              androidStatusBarColor={primaryColor}
+              rounded
+              // noLeft
+              style={homeStyles.header}>
+              <Left>
+                <Image
+                  source={{
+                    uri: urls.LOGO_URL,
+                  }}
+                  style={{
+                    padding: 0,
+                    resizeMode: 'center',
+                    width: '200%',
+                    height: '100%',
+                  }}
+                />
+              </Left>
+              <Body></Body>
+              <Right>
+                <Button transparent>
+                  <Ionicons
+                    name={'heart-outline'}
+                    size={24}
+                    color="#fdfdfd"
+                    onPress={() => navigate('Login')}
+                  />
+                </Button>
+                <Button transparent>
+                  <Ionicons
+                    name="cart-outline"
+                    size={24}
+                    color="#fdfdfd"
+                    onPress={() => navigate('Login')}
+                  />
+                </Button>
+              </Right>
+            </Header>
+          </LinearGradient>
+          {/* Header Search */}
+          <View style={homeStyles.ViewHeader}>
+            <Item
+              style={[
+                homeStyles.SearchBar,
+                this.state.heightFromTop > 59
+                  ? homeStyles.searchBarOnScroll
+                  : null,
+              ]}>
+              <Input placeholder="Search" style={homeStyles.HeaderSearch} />
+              <Icon name="ios-search" />
+            </Item>
+          </View>
         </View>
+        {/* Header Ends */}
+
+        {/* Main Content */}
+        <ScrollView
+          onScroll={this.handleScroll}
+          style={homeStyles.Container}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
+          <View style={{height: 120, backgroundColor: '#eee'}}></View>
+
+          {/* Hero */}
+          <View style={homeStyles.heroWrapper}>
+            <CustomCard imageUrl={require('../assets/Home/Images/52055.jpg')} />
+          </View>
+          {/* Hero Ends */}
+
+          <SafeAreaView
+            style={{
+              marginTop: 10,
+              backgroundColor: '#fff',
+            }}>
+            <FlatGrid
+              scrollEnabled={false}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+              ListHeaderComponent={
+                <>
+                  <Text style={text.headerText}>All services</Text>
+                  <Text style={text.textSecondary}>
+                    Select a service to view more categories
+                  </Text>
+                </>
+              }
+              itemDimension={120}
+              data={data}
+              renderItem={({item}) => (
+                <View>
+                  <OnlyImageCard
+                    imageUrl={item.imageUrl}
+                    title={item.title}
+                    onClick={() => alert('Pressed ' + item.title + ' card')}
+                  />
+                </View>
+              )}
+            />
+          </SafeAreaView>
+
+          <View
+            style={{
+              flex: 1,
+              marginTop: 10,
+              marginBottom: 10,
+              backgroundColor: '#fff',
+            }}>
+            <Text style={text.headerText}>Local people from around you</Text>
+            <CustomCard
+              imageUrl={require('../assets/Home/Images/4011311.jpg')}
+              styles={{resizeMode: 'center'}}
+            />
+
+            <Text style={{...text.textSecondary}}>
+              Choose service providers from locals around you to do your work.
+              People who you can trust.
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flex: 1,
+              marginBottom: 10,
+              backgroundColor: '#fff',
+            }}>
+            <Text style={text.headerText}>7 days free follow-up</Text>
+            <CustomCard
+              imageUrl={require('../assets/Home/Images/4011311.jpg')}
+              styles={{resizeMode: 'center'}}
+            />
+
+            <Text style={{...text.textSecondary}}>
+              Free 7 days follow up for registered* for completed services. You
+              can raise a request if you are not satisfied in between the time.
+            </Text>
+          </View>
+        </ScrollView>
       </Container>
     );
   }

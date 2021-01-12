@@ -84,7 +84,7 @@ const auth = ({navigation}) => {
             <View style={{}}>
               <View style={MainContent.buttonsWrapper}>
                 <Button
-                  onPress={() => navigation.navigate('Email Auth')}
+                  onPress={() => navigation.navigate('EmailAuth')}
                   style={{
                     ...buttonStyles.primary,
                     width: '100%',

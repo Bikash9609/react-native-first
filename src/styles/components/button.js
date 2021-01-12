@@ -18,3 +18,27 @@ export const buttonStyles = StyleSheet.create({
 });
 
 // export default buttonStyles;
+
+export const socialButtonStyles = StyleSheet.create({
+  google: {
+    ...buttonStyles.primary,
+    backgroundColor: '#DB4437',
+    paddingTop: 30,
+    paddingBottom: 30,
+    elevation: 4,
+  },
+  facebook: {
+    ...buttonStyles.primary,
+    backgroundColor: '#3b5998',
+    paddingTop: 30,
+    paddingBottom: 30,
+    elevation: 4,
+  },
+  twitter: {
+    ...buttonStyles.primary,
+    backgroundColor: '#1DA1F2',
+    paddingTop: 30,
+    paddingBottom: 30,
+    elevation: 4,
+  },
+});

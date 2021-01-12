@@ -9,19 +9,14 @@ export const authForm = StyleSheet.create({
   },
   regularInput: {
     marginLeft: 0,
-    marginBottom: 0,
     borderRadius: 10,
     backgroundColor: '#eee',
     paddingLeft: 10,
   },
-  regularInput_Error: {
-    borderWidth: 1,
-    backgroundColor: 'rgba(255, 0, 0, 0.05)',
-    borderColor: 'red',
-  },
   label: {},
   input: {
     paddingLeft: 0,
+
     // backgroundColor: '#eee',
   },
   errorWrapper: {
@@ -33,4 +28,28 @@ export const authForm = StyleSheet.create({
     // marginBottom: 20,
     color: 'red',
   },
+  dividers: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    borderRadius: 10,
+    marginVertical: 30,
+  },
+  divider: {
+    height: 2,
+    backgroundColor: 'rgba(204, 204, 204, 0.5)',
+    width: '100%',
+    marginHorizontal: 10,
+  },
+  socialLoginsWrapper: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    padding: 10,
+  },
 });
+
+export const signupForm = StyleSheet.create({});

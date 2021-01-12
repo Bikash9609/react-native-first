@@ -15,6 +15,8 @@ import ListScreen from './src/screens/ListScreen';
 import AuthScreen from './src/screens/Auth';
 import EmailAuth from './src/screens/Auth/Email-Auth';
 
+import {MainStackNavigator} from './src/navigation/Navigator.js';
+
 import {primaryColor, secondaryColor} from './src/styles/components/colors';
 
 const {Navigator, Screen} = createStackNavigator();
@@ -40,6 +42,7 @@ const AuthScreenStack = () => {
   return (
     <Navigator
       headerMode="screen"
+      initialRouteName="Email Auth"
       screenOptions={{
         animationEnabled: true,
       }}>
@@ -79,38 +82,13 @@ function MyTabs() {
   }, []);
 
   const {Navigator, Screen} = Tab;
-  const options = {
-    initialRouteName: 'Home',
-    activeColor: 'tomato',
-    inactiveColor: 'black',
-    barStyle: {backgroundColor: '#eee'},
-    shifting: true,
-  };
 
   if (!isReady) {
     return <ActivityIndicator />;
   }
   return (
     <NavigationContainer>
-      <Navigator
-        initialRouteName="Login"
-        tabBarOptions={{keyboardHidesTabBar: true}}>
-        <Screen
-          name="Home"
-          component={HomeScreenStack}
-          options={{...options, headerShown: false, tabBarVisible: false}}
-        />
-        <Screen
-          name="Login"
-          component={AuthScreenStack}
-          options={{...options, headerShown: false, tabBarVisible: false}}
-        />
-        <Screen
-          name="Extra"
-          component={UnAuthStack}
-          options={{...options, headerShown: false, tabBarVisible: false}}
-        />
-      </Navigator>
+      <MainStackNavigator />
     </NavigationContainer>
   );
 }

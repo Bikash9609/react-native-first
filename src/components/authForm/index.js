@@ -1,3 +1,1 @@
-import Form from './form';
-
-export default Form;
+export {LoginForm, SignupForm} from './form';

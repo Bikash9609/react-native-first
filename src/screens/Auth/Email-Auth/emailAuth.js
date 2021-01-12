@@ -15,7 +15,7 @@ import {
 import {Ionicons} from '@expo/vector-icons';
 
 // Components
-import AuthForm from '../../../components/authForm';
+import {LoginForm, SignupForm} from '../../../components/authForm';
 
 // Styles
 import {EmailAuthStyles} from '../../../styles/auth-styles';
@@ -34,7 +34,7 @@ const EmailAuth = ({navigation}) => {
           <Button
             transparent
             activeOpacity={0.3}
-            onPress={() => navigation.goBack()}>
+            onPress={() => navigation.navigate('Login')}>
             <Ionicons name="chevron-back-sharp" size={29} color="#000" />
           </Button>
         </Left>
@@ -57,14 +57,16 @@ const EmailAuth = ({navigation}) => {
               <Text style={{color: '#000', fontWeight: 'bold'}}>Log In</Text>
             </TabHeading>
           }>
-          <AuthForm />
+          <LoginForm />
         </Tab>
         <Tab
           heading={
             <TabHeading style={{backgroundColor: '#fff'}}>
               <Text style={{color: '#000', fontWeight: 'bold'}}>Sign Up</Text>
             </TabHeading>
-          }></Tab>
+          }>
+          <SignupForm />
+        </Tab>
       </Tabs>
     </>
   );
