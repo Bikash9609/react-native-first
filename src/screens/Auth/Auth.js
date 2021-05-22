@@ -1,35 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, ImageBackground, Image, StatusBar} from 'react-native';
-import {
-  Body,
-  Container,
-  Content,
-  Text,
-  Title,
-  View,
-  Button,
-  Icon,
-  Right,
-} from 'native-base';
+import {Container, Text, View, Button} from 'native-base';
 import {LinearGradient} from 'expo-linear-gradient';
 import {AntDesign} from '@expo/vector-icons';
 
 import {buttonStyles} from '../../styles/components/index';
 import {MainContent} from '../../styles/auth-styles';
-import Card from '../../components/card/Card';
-import {primaryColor, secondaryColor} from '../../styles/components/colors';
+import {primaryColor} from '../../styles/components/colors';
+import {useSelector} from 'react-redux';
 
 const LOGO_URL =
   'https://res.cloudinary.com/seconde/image/upload/v1609942436/temp/Markar_Logo_500x500_Without_slogan_Text_HOLLOW_Transparent_k0n5kl.png';
 
 const auth = ({navigation}) => {
+  const {isUserLogged} = useSelector((state) => ({
+    isUserLogged: state.auth.isUserLogged,
+    loading: state.auth.loading,
+  }));
+
+  useEffect(() => {
+    if (isUserLogged) {
+      navigation.navigate('Home');
+    }
+  }, [isUserLogged]);
+
   return (
     <Container>
       <StatusBar backgroundColor={primaryColor} barStyle={'dark-content'} />
       <ImageBackground
         source={{
-          uri:
-            'https://cdn.pixabay.com/photo/2013/12/13/21/13/plumber-228010_960_720.jpg',
+          uri: 'https://cdn.pixabay.com/photo/2013/12/13/21/13/plumber-228010_960_720.jpg',
         }}
         blurRadius={0.1}
         resizeMode="cover"
@@ -41,13 +41,13 @@ const auth = ({navigation}) => {
             width: '100%',
             flex: 1,
             justifyContent: 'space-between',
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            backgroundColor: 'rgba(0, 119, 255, 0.3)',
           }}>
           <LinearGradient
             // Background Linear Gradient
             colors={[
-              'rgba(255, 255, 255, 1)',
-              'rgba(255, 255, 255,0.6)',
+              'rgba(0,0,0,0.5)',
+              'rgba(255, 255, 255,0.1)',
               primaryColor,
             ]}
             style={{

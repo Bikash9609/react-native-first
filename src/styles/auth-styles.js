@@ -16,24 +16,19 @@ export const MainContent = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#148bcf',
     flexWrap: 'wrap',
     width: '100%',
     paddingBottom: 20,
     paddingTop: 20,
     paddingVertical: 20,
     paddingHorizontal: 10,
-    // borderRadius: 30,
-    // borderTopEndRadius: 30,
-    // borderTopStartRadius: 30,
-    // bottom: 0,
   },
   // Auth screen text
   mainText: {
-    fontSize: 60,
+    fontSize: 35,
     fontWeight: '700',
-    marginBottom: 50,
-    color: 'rgba(0, 0, 0, 0.9)',
+    marginBottom: 10,
+    color: 'rgba(255, 255, 255, 0.9)',
   },
 });
 

@@ -6,14 +6,16 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AntDesign, Ionicons} from '@expo/vector-icons';
 
 // STYLES
-import {primaryColor} from '../styles/components/colors';
+import {primaryColor} from '../styles/colors';
 
 // SCREENS
 import Login from '../screens/Auth';
 import EmailAuth from '../screens/Auth/Email-Auth';
 import Home from '../screens/HomeScreen';
 import Search from '../screens/ComponentScreen';
-import ListScreen from '../screens/ListScreen';
+import Profile from '../screens/Profile';
+import Listing from '../screens/Listing';
+import Details from '../screens/Details';
 
 const MainStackNavigator = () => {
   const {Navigator, Screen} = createStackNavigator();
@@ -26,7 +28,7 @@ const MainStackNavigator = () => {
   };
   return (
     <Navigator
-      initialRouteName="Home"
+      initialRouteName="Listing"
       tabBarOptions={{keyboardHidesTabBar: true}}>
       <Screen
         name="Login"
@@ -42,6 +44,24 @@ const MainStackNavigator = () => {
         name="Home"
         component={TabNavigator}
         options={{...options, headerShown: false, tabBarVisible: true}}
+      />
+      <Screen
+        name="Listing"
+        component={Listing}
+        options={{
+          ...options,
+          headerShown: false,
+          tabBarVisible: true,
+        }}
+      />
+      <Screen
+        name="Details"
+        component={Details}
+        options={{
+          ...options,
+          headerShown: false,
+          tabBarVisible: true,
+        }}
       />
     </Navigator>
   );
@@ -71,7 +91,7 @@ const TabNavigator = () => {
       />
       <Screen
         name="Profile"
-        component={ListScreen}
+        component={Profile}
         options={{
           tabBarIcon: ({color, focused, size}) => (
             <Ionicons

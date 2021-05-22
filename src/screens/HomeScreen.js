@@ -21,14 +21,12 @@ import {
   Text,
   Col,
 } from 'native-base';
+import {StatusBar} from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import {FlatGrid} from 'react-native-super-grid';
 import Ripple from 'react-native-material-ripple';
-
-// ICONS
 import {Ionicons} from '@expo/vector-icons';
 
-// STYLES
 import {
   lightTheme,
   primaryColor,
@@ -36,11 +34,7 @@ import {
 } from '../styles/components/colors';
 import {homeStyles} from '../styles/screens/home-screen';
 import {text} from '../styles/globals';
-
-// COMPONENTS
 import {OnlyImageCard, CustomCard} from '../components/card/Card';
-
-// CONSTATNS
 import {urls} from '../constants/Globals';
 import {home} from '../constants/screens/home-screen';
 import {color} from 'react-native-reanimated';
@@ -52,7 +46,6 @@ class HomeScreen extends Component {
 
   handleScroll = (event) => {
     const layout = event.nativeEvent.contentOffset.y;
-    console.log(layout);
     this.setState({heightFromTop: layout});
   };
 
@@ -72,6 +65,7 @@ class HomeScreen extends Component {
 
     return (
       <Container style={{backgroundColor: 'transparent'}}>
+        <StatusBar backgroundColor={primaryColor} />
         {/* Header */}
         <View
           style={{
@@ -93,12 +87,7 @@ class HomeScreen extends Component {
                   source={{
                     uri: urls.LOGO_URL,
                   }}
-                  style={{
-                    padding: 0,
-                    resizeMode: 'center',
-                    width: '200%',
-                    height: '100%',
-                  }}
+                  style={homeStyles.headerLogo}
                 />
               </Left>
               <Body></Body>
@@ -176,7 +165,7 @@ class HomeScreen extends Component {
                   <OnlyImageCard
                     imageUrl={item.imageUrl}
                     title={item.title}
-                    onClick={() => alert('Pressed ' + item.title + ' card')}
+                    onClick={() => navigate('Listing')}
                   />
                 </View>
               )}

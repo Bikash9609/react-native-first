@@ -1,8 +1,7 @@
-import React from 'react';
-import {Image} from 'react-native';
+import React, {useEffect} from 'react';
+import {Image, ActivityIndicator} from 'react-native';
 import {
   Text,
-  View,
   Header,
   Left,
   Body,
@@ -10,22 +9,64 @@ import {
   Tab,
   Tabs,
   TabHeading,
-  Right,
+  Container,
+  View,
 } from 'native-base';
 import {Ionicons} from '@expo/vector-icons';
+import {useDispatch, useSelector} from 'react-redux';
+import {CommonActions} from '@react-navigation/native';
 
 // Components
+import * as authActions from '../../../store/auth/actions';
 import {LoginForm, SignupForm} from '../../../components/authForm';
+import Loader from '../../../components/Loader';
 
 // Styles
 import {EmailAuthStyles} from '../../../styles/auth-styles';
-import {primaryColor, secondaryColor} from '../../../styles/components/colors';
+import {primaryColor} from '../../../styles/components/colors';
 
 const EmailAuth = ({navigation}) => {
-  const LOGO_URL =
-    'https://res.cloudinary.com/seconde/image/upload/v1609942436/temp/Markar_Logo_500x500_Without_slogan_Text_HOLLOW_Transparent_k0n5kl.png';
+  const dispatch = useDispatch();
+  const {loading, isUserLogged} = useSelector((state) => ({
+    loading: state.auth.loading,
+    isUserLogged: state.auth.isUserLogged,
+  }));
+
+  useEffect(() => {
+    if (isUserLogged) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            {name: 'Home'},
+            {
+              name: 'Profile',
+            },
+          ],
+        }),
+      );
+      navigation.navigate('Home');
+    }
+  }, [isUserLogged]);
+
+  const onUserLogin = (data) => {
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+    dispatch(authActions.userLogin(payload));
+  };
+
+  // TODO: to be implemented
+  const onUserSignup = (data) => {
+    return alert('Signup not yet implemented');
+    const payload = {};
+    dispatch(authActions.userSignup(data));
+  };
+
   return (
     <>
+      {loading && <Loader />}
       <Header
         noShadow
         androidStatusBarColor={primaryColor}
@@ -57,7 +98,7 @@ const EmailAuth = ({navigation}) => {
               <Text style={{color: '#000', fontWeight: 'bold'}}>Log In</Text>
             </TabHeading>
           }>
-          <LoginForm />
+          <LoginForm onSubmit={onUserLogin} />
         </Tab>
         <Tab
           heading={
@@ -65,7 +106,7 @@ const EmailAuth = ({navigation}) => {
               <Text style={{color: '#000', fontWeight: 'bold'}}>Sign Up</Text>
             </TabHeading>
           }>
-          <SignupForm />
+          <SignupForm onSubmit={onUserSignup} />
         </Tab>
       </Tabs>
     </>

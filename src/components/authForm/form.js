@@ -32,16 +32,17 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import UserTypeSelector from '../../components/userTypeSelector';
 
 // REGEX
-const EMAIL_VALIDATION_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_VALIDATION_REGEX =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_VALIDATION_REGEX = new RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&amp;*])(?=.{8,})',
 );
 
-export const LoginForm = () => {
+export const LoginForm = ({onSubmit}) => {
   const {control, handleSubmit, errors} = useForm();
 
   const formSubmitHandler = (data) => {
-    console.log(data);
+    onSubmit(data);
   };
 
   return (
@@ -58,6 +59,7 @@ export const LoginForm = () => {
           <Label style={authForm.label}>Email</Label>
           <Controller
             name="email"
+            defaultValue=""
             control={control}
             rules={{
               required: {
@@ -73,7 +75,6 @@ export const LoginForm = () => {
               <Input
                 textContentType="emailAddress"
                 style={authForm.input}
-                defaultValue=""
                 onChangeText={(text) => onChange(text)}
                 value={value}
               />
@@ -96,6 +97,7 @@ export const LoginForm = () => {
           <Label style={authForm.label}>Password</Label>
           <Controller
             name="password"
+            defaultValue=""
             rules={{
               required: {
                 value: true,
@@ -106,10 +108,10 @@ export const LoginForm = () => {
                 message: 'Password must be 8 or more characters long.',
               },
               maxLength: 80,
-              pattern: {
-                value: PASSWORD_VALIDATION_REGEX,
-                message: 'Password must be strong.',
-              },
+              // pattern: {
+              //   value: PASSWORD_VALIDATION_REGEX,
+              //   message: 'Password must be strong.',
+              // },
             }}
             control={control}
             render={({onChange, value}) => (
@@ -117,7 +119,6 @@ export const LoginForm = () => {
                 textContentType="password"
                 style={authForm.input}
                 autoCompleteType={'email'}
-                defaultValue=""
                 onChangeText={(text) => onChange(text)}
                 value={value}
               />

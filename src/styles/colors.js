@@ -1,9 +1,18 @@
 export const textColors = {
   colored: 'orange',
+  secondaryLight: '#949494',
+  secondary: '#4d4d4d',
+  primary: '#444548',
 };
 
-export const primaryColor = '#00A1FF';
-export const secondaryColor = '#00C0FF';
+export const borderColor = '#ccc';
+
+export const primaryDarkColor = '#cc8400';
+export const primaryColor = '#FFA500';
+export const primaryLightColor = '#ffd280';
+export const iconBgColor = '#fff6e6';
+export const secondaryColor = '#ffc04d';
+export const bgColored = '#ffa500';
 
 export const lightTheme = {
   textColor: '#333',

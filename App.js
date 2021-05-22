@@ -1,64 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, ActivityIndicator} from 'react-native';
-import 'react-native-gesture-handler';
+import {ActivityIndicator} from 'react-native';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import * as Font from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';
-
-import {Text, View} from 'native-base';
 import {NavigationContainer, DefaultThemem} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
 
-import HomeScreen from './src/screens/HomeScreen';
-import ComponentScreen from './src/screens/ComponentScreen';
-import ListScreen from './src/screens/ListScreen';
-import AuthScreen from './src/screens/Auth';
-import EmailAuth from './src/screens/Auth/Email-Auth';
-
-import {MainStackNavigator} from './src/navigation/Navigator.js';
-
+import store, {persistedStore} from './src/store';
+import 'react-native-gesture-handler';
 import {primaryColor, secondaryColor} from './src/styles/components/colors';
-
-const {Navigator, Screen} = createStackNavigator();
-
-const UnAuthStack = () => {
-  return (
-    <Navigator headerMode="screen" initialRouteName="Listscreen">
-      <Screen name="Listscreen" component={ListScreen} />
-      <Screen name="Other" component={ComponentScreen} />
-    </Navigator>
-  );
-};
-
-const HomeScreenStack = () => {
-  return (
-    <Navigator headerMode="none" screenOptions={{animationEnabled: true}}>
-      <Screen name="Home" component={HomeScreen} />
-    </Navigator>
-  );
-};
-
-const AuthScreenStack = () => {
-  return (
-    <Navigator
-      headerMode="screen"
-      initialRouteName="Email Auth"
-      screenOptions={{
-        animationEnabled: true,
-      }}>
-      <Screen
-        name="Login"
-        component={AuthScreen}
-        options={{headerShown: false}}
-      />
-      <Screen
-        name="Email Auth"
-        component={EmailAuth}
-        options={{headerShown: false}}
-      />
-    </Navigator>
-  );
-};
+import {MainStackNavigator} from './src/navigation/Navigator.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -81,25 +33,18 @@ function MyTabs() {
     loadFont();
   }, []);
 
-  const {Navigator, Screen} = Tab;
-
   if (!isReady) {
     return <ActivityIndicator />;
   }
   return (
-    <NavigationContainer>
-      <MainStackNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistedStore}>
+        <NavigationContainer>
+          <MainStackNavigator />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  footerIcons: {
-    color: '#858282',
-  },
-  activeFooterIcons: {
-    color: 'orange',
-  },
-});
 
 export default MyTabs;
