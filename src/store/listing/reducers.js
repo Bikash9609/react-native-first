@@ -6,6 +6,12 @@ const initialState = {
   profiles: null,
   query: null,
   selectedProfile: null,
+  services: {
+    loading: false,
+    page: 0,
+    items: null,
+    error: null,
+  },
 };
 
 const listingReducer = createSlice({
@@ -37,6 +43,18 @@ const listingReducer = createSlice({
     setSelectedProfile(state, {payload}) {
       return {...state, selectedProfile: payload};
     },
+    setServices(state, {payload}) {
+      state.services.items = payload.items;
+      state.services.page = payload.page;
+      state.services.loading = false;
+    },
+    setServicesError(state, {payload}) {
+      state.services.error = payload;
+      state.services.loading = false;
+    },
+    setServicesLoading(state) {
+      state.services.loading = true;
+    },
     clearSelectedProfile(state) {
       return {...state, selectedProfile: null};
     },
@@ -49,6 +67,9 @@ export const {
   setProfiles,
   setLoading,
   setQuery,
+  setServices,
+  setServicesError,
+  setServicesLoading,
   setSelectedProfile,
   clearSelectedProfile,
 } = listingReducer.actions;

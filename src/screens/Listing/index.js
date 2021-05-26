@@ -21,12 +21,17 @@ import {AntDesign, Entypo} from '@expo/vector-icons';
 import {ScrollView} from 'react-native-gesture-handler';
 import _ from 'lodash';
 import {Rating} from 'react-native-ratings';
+import LottieView from 'lottie-react-native';
 
 import {setProfiles, setSelectedProfile} from '../../store/listing/reducers';
 import * as listingActions from '../../store/listing/actions';
+
 import Loader from '../../components/Loader/index';
 import SearchItem from './components/ListItem';
+import SearchLoadingLottie from '../assets/lottie/27773-hand-shake-business-deal.json';
+
 import {styles, gridStyles as gStyles} from './styles';
+import * as ListingStyled from './listing-styled';
 
 const GridItem = ({data, onPress}) => {
   return (
@@ -175,7 +180,15 @@ export function Index({navigation}) {
           </Button>
         </Header>
 
-        {loading && <Loader containerHeight={'90%'} />}
+        {loading && (
+          <ListingStyled.LoaderContainer>
+            <ListingStyled.LoadingLottie
+              source={require('../assets/lottie/58560-work-from-home-chill.json')}
+              autoPlay
+              loop
+            />
+          </ListingStyled.LoaderContainer>
+        )}
 
         {searchData?.data?.length > 0 ? (
           <View style={styles.searchSuggestion}>

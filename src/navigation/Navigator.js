@@ -1,9 +1,9 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // ICONS
-import {AntDesign, Ionicons} from '@expo/vector-icons';
+import {Entypo, Ionicons} from '@expo/vector-icons';
 
 // STYLES
 import {primaryColor} from '../styles/colors';
@@ -16,6 +16,7 @@ import Search from '../screens/ComponentScreen';
 import Profile from '../screens/Profile';
 import Listing from '../screens/Listing';
 import Details from '../screens/Details';
+import Booking from '../screens/Bookings';
 
 const MainStackNavigator = () => {
   const {Navigator, Screen} = createStackNavigator();
@@ -28,7 +29,7 @@ const MainStackNavigator = () => {
   };
   return (
     <Navigator
-      initialRouteName="Listing"
+      initialRouteName="Home"
       tabBarOptions={{keyboardHidesTabBar: true}}>
       <Screen
         name="Login"
@@ -55,6 +56,23 @@ const MainStackNavigator = () => {
         }}
       />
       <Screen
+        name="Booking"
+        component={Booking}
+        options={{
+          ...options,
+          headerShown: true,
+          tabBarVisible: true,
+          headerTitle: 'Bookings',
+          headerLeft: ({canGoBack, onPress}) => (
+            <HeaderBackButton
+              canGoBack={canGoBack}
+              disabled={!canGoBack}
+              onPress={onPress}
+            />
+          ),
+        }}
+      />
+      <Screen
         name="Details"
         component={Details}
         options={{
@@ -75,6 +93,7 @@ const TabNavigator = () => {
       initialRouteName={'Home'}
       tabBarOptions={{
         activeTintColor: primaryColor,
+        adaptive: true,
       }}>
       <Screen
         name="Home"

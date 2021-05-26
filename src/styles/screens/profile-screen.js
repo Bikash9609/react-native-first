@@ -6,9 +6,19 @@ import {
   primaryColor,
   secondaryColor,
   borderColor,
+  primaryLightColor,
 } from '../colors';
 
 export const ProfileStyles = StyleSheet.create({
+  headerText: {
+    paddingLeft: 10,
+    height: '100%',
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   wrapper: {
     height: '100%',
     backgroundColor: '#fff',
@@ -16,10 +26,8 @@ export const ProfileStyles = StyleSheet.create({
   backDrop: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingBottom: 10,
     width: '100%',
     backgroundColor: 'rgba(0, 162, 255, 0)',
-    paddingHorizontal: 10,
   },
 
   logoWrapper: {
@@ -41,36 +49,15 @@ export const ProfileStyles = StyleSheet.create({
   },
 
   innerWrapper: {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
     borderRadius: 30,
     padding: 20,
   },
 
-  authButton: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#dedede',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    elevation: 0,
-    borderRadius: 50,
-    paddingHorizontal: 20,
-    paddingTop: 30,
-    paddingBottom: 30,
-    maxHeight: '100%',
-    marginBottom: 10,
-  },
   authIcon: {
-    color: '#fff',
-    backgroundColor: primaryColor,
-    padding: 10,
-    borderRadius: 50,
+    color: primaryColor,
   },
   authButtonText: {
     color: textColors.primary,
-    marginLeft: -25,
     fontWeight: '400',
     fontSize: 19,
     textAlign: 'center',
@@ -94,7 +81,7 @@ export const ProfileStyles = StyleSheet.create({
     paddingVertical: 15,
     borderBottomWidth: 2,
     borderColor: '#eee',
-    backgroundColor: 'rgba(222, 222, 222, 0.8)',
+    backgroundColor: '#87d3fc',
     height: 240,
     paddingHorizontal: 20,
   },
@@ -122,11 +109,23 @@ export const ProfileStyles = StyleSheet.create({
     marginTop: -50,
   },
   listItem: {},
+  iconWrapper: {
+    borderRadius: 20,
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+    backgroundColor: primaryLightColor,
+    maxWidth: '100%',
+    marginRight: 10,
+  },
   listIcon: {
     padding: 10,
-    backgroundColor: iconBgColor,
     borderRadius: 20,
-    marginRight: 10,
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
     color: textColors.secondary,
   },
   listText: {

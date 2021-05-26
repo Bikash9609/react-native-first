@@ -6,10 +6,11 @@ import * as colors from '../../styles/colors';
 import Button from '../Button/';
 
 const Index = ({
+  specialPrice,
   price,
   description,
   name,
-  limitText,
+  limitText = 20,
   onAdd,
   isAdded,
   wrapperStyle,
@@ -27,14 +28,14 @@ const Index = ({
           />
         </View>
         <View style={styles().textWrapper}>
-          <Text style={styles().serviceText}>Washing clothes</Text>
-          <Text style={styles().serviceDescription}>
-            This is a service description and should be short so that a customer
-          </Text>
+          <Text style={styles().serviceText}>{name}</Text>
+          <Text style={styles().serviceDescription}>{description}</Text>
         </View>
       </View>
       <View style={styles().buttonWrapper}>
-        <Text style={styles().serviceCharge}>₹420 / day</Text>
+        <Text style={styles().serviceCharge}>
+          ₹{parseFloat(specialPrice).toFixed(2).replace('.00', '')} / day
+        </Text>
         <Button
           inverted
           buttonStyle={styles({isAdded}).button}

@@ -5,6 +5,9 @@ import {
   setProfiles,
   setQuery,
   setSelectedProfile,
+  setServices,
+  setServicesError,
+  setServicesLoading,
   clearSelectedProfile,
 } from './reducers';
 import {publicUrls as URL} from '../../constants/Globals';
@@ -30,6 +33,33 @@ export function searchProfiles(category, page) {
   };
 }
 
+export function searchServices(profileId, page) {
+  return async (dispatch) => {
+    dispatch(setServicesLoading());
+    try {
+      const payload = {
+        sellerId: profileId,
+        page: page,
+      };
+      const allServices = await post(URL.getServices, payload);
+      dispatch(
+        setServices({
+          items: allServices?.data,
+          page,
+        }),
+      );
+    } catch (error) {
+      dispatch(
+        setServicesError({
+          message: error.message,
+          status: error.status,
+          data: JSON.stringify(error),
+        }),
+      );
+    }
+  };
+}
+
 export function searchProfilesById(profileId) {
   return async (dispatch) => {
     dispatch(clearSelectedProfile());
@@ -39,6 +69,7 @@ export function searchProfilesById(profileId) {
         profileId,
       };
       const results = await post(URL.getById, payload);
+      dispatch(searchServices(profileId, 0));
       dispatch(setSelectedProfile(results));
       dispatch(setLoading(false));
     } catch (err) {

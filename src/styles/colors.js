@@ -9,8 +9,8 @@ export const borderColor = '#ccc';
 
 export const primaryDarkColor = '#cc8400';
 export const primaryColor = '#FFA500';
-export const primaryLightColor = '#ffd280';
-export const iconBgColor = '#fff6e6';
+export const primaryLightColor = 'rgba(135, 211, 252, 0.3)';
+export const iconBgColor = 'rgba(135, 211, 252, 0.5)';
 export const secondaryColor = '#ffc04d';
 export const bgColored = '#ffa500';
 

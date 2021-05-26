@@ -16,6 +16,7 @@ import createSecureStore from '@neverdull-agency/expo-unlimited-secure-store';
 import authReducer from './auth/reducers';
 import profileReducer from './profile/reducers';
 import listingReducer from './listing/reducers';
+import bookingReducer from './booking/reducers';
 
 const storage = createSecureStore();
 
@@ -30,12 +31,13 @@ const rootReducer = combineReducers({
     },
     listingReducer,
   ),
+  booking: bookingReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  // blacklist: ['profile'],
+  blacklist: ['booking'],
 };
 
 const persistRed = persistReducer(persistConfig, rootReducer);

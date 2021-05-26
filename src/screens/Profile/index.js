@@ -9,25 +9,28 @@ import {
   ToastAndroid,
   ImageBackground,
   Image,
+  Platform,
 } from 'react-native';
 import {Body, Button, Header, List, ListItem, Right, Title} from 'native-base';
 import {AntDesign} from '@expo/vector-icons';
 import {useDispatch, useSelector} from 'react-redux';
 import {LinearGradient} from 'expo-linear-gradient';
 
-import * as profileActions from '../store/profile/actions';
-import * as authActions from '../store/auth/actions';
+import * as profileActions from '../../store/profile/actions';
+import * as authActions from '../../store/auth/actions';
 
-import Loader from '../components/Loader';
+import Loader from '../../components/Loader';
+
 import {
   lightTheme,
   primaryColor,
   textColors,
   secondaryColor,
-} from '../styles/colors';
-import {text} from '../styles/globals';
-import {buttonStyles, socialButtonStyles} from '../styles/components/button';
-import {ProfileStyles} from '../styles/screens/profile-screen';
+} from '../../styles/colors';
+import {text} from '../../styles/globals';
+import {buttonStyles, socialButtonStyles} from '../../styles/components/button';
+import {ProfileStyles} from '../../styles/screens/profile-screen';
+import * as ProfileStyled from './profile.styled';
 
 function ListScreen({navigation}) {
   const dispatch = useDispatch();
@@ -59,44 +62,38 @@ function ListScreen({navigation}) {
     return (
       <ImageBackground
         resizeMode="cover"
-        blurRadius={1}
-        source={require('./assets/images/bg/Shiny_Overlay.png')}
+        blurRadius={0}
+        source={require('../assets/icons/ProfileScreen/svg.png')}
         style={ProfileStyles.wrapper}>
         <LinearGradient
-          colors={['rgba(255,255,255, 0.6)', 'rgba(255, 255, 255, 0.9)']}
+          colors={['rgba(0, 162, 255, 0.45)', 'rgba(0, 162, 255, 1)']}
           start={{x: 0.2, y: 0.1}}
           style={ProfileStyles.backDrop}>
-          <View style={ProfileStyles.logoWrapper}>
-            <Image
-              source={require('./assets/images/AuthScreen/Logo_Nav_2.png')}
-              style={ProfileStyles.LogoImage}
-              height={40}
-              resizeMode="contain"
-              width="100%"
-            />
-          </View>
-          <View style={ProfileStyles.innerWrapper}>
-            <Button
-              style={ProfileStyles.authButton}
-              iconLeft
+          <ProfileStyled.LogoMainWrapper>
+            <ProfileStyled.LogoWrapper>
+              <ProfileStyled.LogoImage
+                source={require('../assets/images/AuthScreen/Logo_Nav_2.png')}
+                height={'100%'}
+                resizeMode="contain"
+                width="100%"
+              />
+            </ProfileStyled.LogoWrapper>
+          </ProfileStyled.LogoMainWrapper>
+          <ProfileStyled.InnerWrapper style={ProfileStyles.innerWrapper}>
+            <ProfileStyled.AuthButton
               onPress={() => navigation.navigate('EmailAuth')}
               full
               activeOpacity={0.8}>
-              <AntDesign name="mail" size={19} style={ProfileStyles.authIcon} />
               <Text style={ProfileStyles.authButtonText}>Signup</Text>
-              <View></View>
-            </Button>
-            <Button
-              style={ProfileStyles.authButton}
-              iconLeft
+            </ProfileStyled.AuthButton>
+            <ProfileStyled.AuthButton
+              loginButton
               onPress={() => navigation.navigate('EmailAuth')}
               full
               activeOpacity={0.8}>
-              <AntDesign name="mail" size={19} style={ProfileStyles.authIcon} />
               <Text style={ProfileStyles.authButtonText}>Login</Text>
-              <View></View>
-            </Button>
-          </View>
+            </ProfileStyled.AuthButton>
+          </ProfileStyled.InnerWrapper>
         </LinearGradient>
       </ImageBackground>
     );
@@ -106,6 +103,7 @@ function ListScreen({navigation}) {
     <>
       {loading && <Loader />}
       {error &&
+        Platform.OS !== 'ios' &&
         ToastAndroid.show(
           error?.message || 'Some error ocurred',
           ToastAndroid.SHORT,
@@ -127,9 +125,10 @@ function ListScreen({navigation}) {
             noLeft
             style={{backgroundColor: '#fff'}}
             androidStatusBarColor="#FFA500">
-            <Body>
+            <View style={ProfileStyles.headerText}>
               <Title style={{color: '#000'}}>My profile</Title>
-            </Body>
+            </View>
+            <Body></Body>
             <Right>
               <Button transparent>
                 <AntDesign name="setting" color="#000" size={24} />
@@ -138,9 +137,13 @@ function ListScreen({navigation}) {
           </Header>
 
           <View style={ProfileStyles.profileWrapper}>
-            <LinearGradient
+            <ImageBackground
+              source={require('../assets/icons/ProfileScreen/svg.png')}
+              height="100%"
+              width="100%"
+              resizeMode="cover"
               style={ProfileStyles.header}
-              colors={['rgba(255, 165, 0, 0.9)', 'rgba(255, 165, 0, 0.5)']}>
+              colors={['rgba(255, 165, 0, 0)', 'rgba(255, 165, 0, 0.9)']}>
               <View style={ProfileStyles.innerHeader}>
                 <Text
                   style={{
@@ -157,59 +160,77 @@ function ListScreen({navigation}) {
                   {contactNo?.value.substring(5, 10)}
                 </Text>
               </View>
-            </LinearGradient>
+            </ImageBackground>
 
             <View style={ProfileStyles.listWrapper}>
               <List indicatorStyle="black">
-                <ListItem style={ProfileStyles.listItem} noBorder>
-                  <AntDesign
-                    name="user"
-                    size={29}
-                    style={ProfileStyles.listIcon}
-                  />
+                <ListItem
+                  style={ProfileStyles.listItem}
+                  noBorder
+                  onPress={() => navigation.navigate('Booking')}>
+                  <View style={ProfileStyles.iconWrapper}>
+                    <AntDesign
+                      name="user"
+                      size={29}
+                      style={ProfileStyles.listIcon}
+                    />
+                  </View>
                   <Text style={ProfileStyles.listText}>My bookings</Text>
                 </ListItem>
                 <ListItem style={ProfileStyles.listItem} noBorder>
-                  <AntDesign
-                    name="hearto"
-                    size={29}
-                    style={ProfileStyles.listIcon}
-                  />
+                  <View style={ProfileStyles.iconWrapper}>
+                    <AntDesign
+                      name="hearto"
+                      size={29}
+                      style={ProfileStyles.listIcon}
+                    />
+                  </View>
                   <Text style={ProfileStyles.listText}>Saved</Text>
                 </ListItem>
                 <ListItem style={ProfileStyles.listItem} noBorder>
-                  <AntDesign
-                    name="customerservice"
-                    size={29}
-                    style={ProfileStyles.listIcon}
-                  />
+                  <View style={ProfileStyles.iconWrapper}>
+                    <AntDesign
+                      name="customerservice"
+                      size={29}
+                      style={ProfileStyles.listIcon}
+                    />
+                  </View>
                   <Text style={ProfileStyles.listText}>Support</Text>
                 </ListItem>
                 <ListItem style={ProfileStyles.listItem} noBorder>
-                  <AntDesign
-                    name="setting"
-                    size={29}
-                    style={ProfileStyles.listIcon}
-                  />
+                  <View style={ProfileStyles.iconWrapper}>
+                    <AntDesign
+                      name="setting"
+                      size={29}
+                      style={ProfileStyles.listIcon}
+                    />
+                  </View>
                   <Text style={ProfileStyles.listText}>Settings</Text>
                 </ListItem>
-                <ListItem style={ProfileStyles.listItem} noBorder>
-                  <AntDesign
-                    name="sync"
-                    size={29}
-                    style={ProfileStyles.listIcon}
-                  />
+                <ListItem
+                  style={ProfileStyles.listItem}
+                  noBorder
+                  onPress={() => alert('Hi')}>
+                  <View style={ProfileStyles.iconWrapper}>
+                    <AntDesign
+                      name="sync"
+                      size={29}
+                      style={ProfileStyles.listIcon}
+                    />
+                  </View>
                   <Text style={ProfileStyles.listText}>Extras</Text>
                 </ListItem>
                 <ListItem
                   style={ProfileStyles.listItem}
                   onPress={onUserLogout}
                   noBorder>
-                  <AntDesign
-                    name="logout"
-                    size={29}
-                    style={ProfileStyles.listIcon}
-                  />
+                  <View style={ProfileStyles.iconWrapper}>
+                    <AntDesign
+                      name="logout"
+                      size={29}
+                      style={ProfileStyles.listIcon}
+                    />
+                  </View>
                   <Text style={ProfileStyles.listText}>Logout</Text>
                 </ListItem>
               </List>

@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import {Rating} from 'react-native-ratings';
-import {AntDesign, Entypo} from '@expo/vector-icons';
-import {Header, Left, Item} from 'native-base';
+import {AntDesign} from '@expo/vector-icons';
 
 import Loader from '../../components/Loader';
 import ServiceItem from '../../components/ServiceItem';
 import Button from '../../components/Button';
 import Carousel from '../../components/carousel/carousel';
+import TextSummary from '../../components/TextSummary';
 
 import {
   styles,
@@ -54,10 +54,11 @@ const data = [
 ];
 
 const Index = ({navigation}) => {
-  const {profileDetails, loading, error} = useSelector((state) => ({
+  const {profileDetails, loading, error, services} = useSelector((state) => ({
     profileDetails: state.listing.selectedProfile,
     loading: state.listing.loading,
     error: state.listing.error,
+    services: state.listing.services,
   }));
 
   if (loading) {
@@ -122,17 +123,32 @@ const Index = ({navigation}) => {
             <Content type="title" text="Description" />
             <Content
               type="body"
-              text={`${profileDetails?.bio?.substring(0, 100)}...(Read more)`}
+              text={
+                <TextSummary string={profileDetails?.bio} longSummary={false} />
+              }
             />
           </View>
 
           <View style={styles.serviceableItems}>
-            <Content type="title" text="Additional Services" />
-            <ServiceItem isAdded />
-            <ServiceItem />
-            <ServiceItem />
-            <ServiceItem />
-            <ServiceItem />
+            {services.loading ? (
+              <Loader containerHeight="20%" />
+            ) : (
+              services.items?.length > 0 && (
+                <>
+                  <Content type="title" text="Additional Services" />
+                  {services.items.map((item) => (
+                    <ServiceItem
+                      key={item._id}
+                      isAdded={false}
+                      price={item?.price}
+                      specialPrice={item?.specialPrice}
+                      name={item?.name}
+                      description={item?.description}
+                    />
+                  ))}
+                </>
+              )
+            )}
           </View>
         </ScrollView>
         <LinearGradient
