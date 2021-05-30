@@ -186,6 +186,7 @@ export function Index({navigation}) {
               source={require('../assets/lottie/58560-work-from-home-chill.json')}
               autoPlay
               loop
+              
             />
           </ListingStyled.LoaderContainer>
         )}

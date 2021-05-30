@@ -3,30 +3,33 @@
     "name": "rn-starter",
     "slug": "rn-starter",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Maarkar (2).png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash_screen_new.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.blipOr.maarkar",
+      "config": {
+        "googleMapsApiKey": "AIzaSyCiWr8NTiq9hnGa2vpSpY_a8u0HIqA1RAU"
+      }
     },
     "android": {
-      "package": "com.blipOr.Maarkar"
+      "package": "com.blipOr.maarkar",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyA9ijQZofM5XkK9TYU5n9X8uxt9gd10eb4"
+        }
+      }
     }
   }
 }

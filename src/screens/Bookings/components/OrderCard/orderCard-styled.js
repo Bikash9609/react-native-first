@@ -8,7 +8,6 @@ export const CardWrapper = styled.View`
   background: #fff;
   padding: 10px;
   text-align: left;
-  margin: 10px;
   margin-bottom: 0px;
   border-radius: 10px;
   box-shadow: 0 5px 10px #eee;
@@ -45,7 +44,7 @@ export const CardHeader = styled.Text`
 
 export const Item = styled.View`
   text-align: right;
-  align-items: flex-start;
+  align-items: ${(props) => props.alignItems || 'flex-start'};
   padding-left: 20px;
 `;
 

@@ -21,12 +21,26 @@ import bookingReducer from './booking/reducers';
 const storage = createSecureStore();
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  profile: profileReducer,
+  auth: persistReducer(
+    {
+      key: 'auth',
+      blacklist: ['loading', 'error'],
+      storage,
+    },
+    authReducer,
+  ),
+  profile: persistReducer(
+    {
+      key: 'profile',
+      blacklist: ['loading', 'error'],
+      storage,
+    },
+    profileReducer,
+  ),
   listing: persistReducer(
     {
       key: 'listing',
-      blacklist: ['profiles, loading, error'],
+      blacklist: ['profiles', 'loading', 'error'],
       storage,
     },
     listingReducer,

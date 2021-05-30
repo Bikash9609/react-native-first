@@ -11,12 +11,13 @@ import {primaryColor} from '../styles/colors';
 // SCREENS
 import Login from '../screens/Auth';
 import EmailAuth from '../screens/Auth/Email-Auth';
-import Home from '../screens/HomeScreen';
+import Home from '../screens/Home';
 import Search from '../screens/ComponentScreen';
 import Profile from '../screens/Profile';
 import Listing from '../screens/Listing';
 import Details from '../screens/Details';
 import Booking from '../screens/Bookings';
+import MapsView from '../screens/MapLocation';
 
 const MainStackNavigator = () => {
   const {Navigator, Screen} = createStackNavigator();
@@ -79,6 +80,23 @@ const MainStackNavigator = () => {
           ...options,
           headerShown: false,
           tabBarVisible: true,
+        }}
+      />
+      <Screen
+        name="Location"
+        component={MapsView}
+        options={{
+          ...options,
+          headerShown: true,
+          tabBarVisible: true,
+          headerTitle: 'Search your location',
+          headerLeft: ({canGoBack, onPress}) => (
+            <HeaderBackButton
+              canGoBack={canGoBack}
+              disabled={!canGoBack}
+              onPress={onPress}
+            />
+          ),
         }}
       />
     </Navigator>

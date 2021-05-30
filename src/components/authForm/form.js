@@ -1,35 +1,13 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Form,
-  Input,
-  Item,
-  Label,
-  Icon,
-  Container,
-  Button,
-  ListItem,
-  Left,
-  Right,
-  Radio,
-  Body,
-} from 'native-base';
+import React from 'react';
+import {View, Text, Form, Input, Item, Button} from 'native-base';
 import {useForm, Controller} from 'react-hook-form';
-import {LinearGradient} from 'expo-linear-gradient';
 import {ScrollView} from 'react-native';
 
-// ICONS
 import {AntDesign} from '@expo/vector-icons';
 
-// STYLES
-import {authForm, signupForm} from '../../styles/components/form';
+import {authForm} from '../../styles/components/form';
 import {buttonStyles, socialButtonStyles} from '../../styles/components/button';
 import {primaryColor} from '../../styles/components/colors';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-
-// COMPONENTS
-import UserTypeSelector from '../../components/userTypeSelector';
 
 // REGEX
 const EMAIL_VALIDATION_REGEX =
@@ -47,16 +25,12 @@ export const LoginForm = ({onSubmit}) => {
 
   return (
     <ScrollView>
-      <UserTypeSelector />
-
       <Form style={authForm.wrapper}>
         <Item
-          stackedLabel
           regular
           style={authForm.regularInput}
-          fixedLabel
+          placeholder="Email"
           error={errors.email && true}>
-          <Label style={authForm.label}>Email</Label>
           <Controller
             name="email"
             defaultValue=""
@@ -77,6 +51,9 @@ export const LoginForm = ({onSubmit}) => {
                 style={authForm.input}
                 onChangeText={(text) => onChange(text)}
                 value={value}
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
               />
             )}
           />
@@ -89,12 +66,8 @@ export const LoginForm = ({onSubmit}) => {
           <View style={{marginBottom: 25}}></View>
         )}
         <Item
-          stackedLabel
-          regular
           style={{...authForm.regularInput}}
-          fixedLabel
           error={errors.password && true}>
-          <Label style={authForm.label}>Password</Label>
           <Controller
             name="password"
             defaultValue=""
@@ -121,6 +94,10 @@ export const LoginForm = ({onSubmit}) => {
                 autoCompleteType={'email'}
                 onChangeText={(text) => onChange(text)}
                 value={value}
+                placeholder="Password"
+                keyboardType="visible-password"
+                secureTextEntry
+                autoCapitalize="none"
               />
             )}
           />
@@ -196,18 +173,12 @@ export const SignupForm = () => {
 
   return (
     <ScrollView>
-      <UserTypeSelector />
       <Form style={authForm.wrapper}>
-        <Item
-          stackedLabel
-          regular
-          style={authForm.regularInput}
-          fixedLabel
-          error={errors.email && true}>
-          <Label style={authForm.label}>Email</Label>
+        <Item style={authForm.regularInput} error={errors.email && true}>
           <Controller
             name="email"
             control={control}
+            defaultValue=""
             rules={{
               required: {
                 value: true,
@@ -225,6 +196,8 @@ export const SignupForm = () => {
                 defaultValue=""
                 onChangeText={(text) => onChange(text)}
                 value={value}
+                placeholder="Email"
+                autoCapitalize="none"
               />
             )}
           />
@@ -237,14 +210,12 @@ export const SignupForm = () => {
           <View style={{marginBottom: 25}}></View>
         )}
         <Item
-          stackedLabel
-          regular
+          last
           style={{...authForm.regularInput}}
-          fixedLabel
           error={errors.password && true}>
-          <Label style={authForm.label}>Password</Label>
           <Controller
             name="password"
+            defaultValue=""
             rules={{
               required: {
                 value: true,
@@ -268,6 +239,9 @@ export const SignupForm = () => {
                 value={value}
                 defaultValue=""
                 onChangeText={(text) => onChange(text)}
+                placeholder="Password"
+                secureTextEntry
+                autoCapitalize="none"
               />
             )}
           />

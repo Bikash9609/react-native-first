@@ -30,7 +30,9 @@ const bookingSlice = createSlice({
       state.listEndPage = null;
       state.allBookings = payload;
       state.loading = false;
-      state.pageNo = state.pageNo + 1;
+    },
+    setPageNo(state, {payload}) {
+      state.pageNo = payload;
     },
     setSelectedBooking(state, {payload}) {
       state.selectedBooking = payload;
@@ -50,6 +52,7 @@ export const {
   setBookings,
   setSelectedBooking,
   setListEndPage,
+  setPageNo,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

@@ -8,15 +8,21 @@ import {
   setBookings,
   setSelectedBooking,
   setListEndPage,
+  setPageNo,
 } from './reducers';
 
-export const fetchBookings = () => async (dispatch, getState) => {
+export const fetchBookings = (refresh) => async (dispatch, getState) => {
   const {
     booking: {pageNo, allBookings},
   } = getState();
   try {
     dispatch(setLoading());
-    const res = await API.post(URL.getOrders, {page: pageNo});
+
+    const payload = {
+      page: refresh ? 0 : pageNo,
+    };
+
+    const res = await API.post(URL.getOrders, payload);
     const {data, status} = res;
 
     if (status !== 'OK') throw Error('Some error ocurred!');
@@ -26,10 +32,11 @@ export const fetchBookings = () => async (dispatch, getState) => {
     }
 
     let items = data;
-    if (allBookings) {
+    if (payload.page !== 0) {
       items = [...allBookings, ...data];
     }
     dispatch(setBookings(items));
+    dispatch(setPageNo(payload.page + 1));
   } catch (error) {
     dispatch(setError(error));
   }

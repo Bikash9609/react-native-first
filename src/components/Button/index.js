@@ -14,6 +14,7 @@ function Index({
   elevation,
   disabled,
   inverted,
+  fullWidth,
   ...rest
 }) {
   return (
@@ -24,6 +25,7 @@ function Index({
           : styles({boldText, elevation, disabled}).button,
         buttonStyle,
       ]}
+      full={fullWidth}
       disabled={disabled}
       {...rest}>
       <Text
