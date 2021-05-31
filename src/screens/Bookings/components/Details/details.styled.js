@@ -4,7 +4,7 @@ import RippleWrapper from 'react-native-material-ripple';
 import * as colors from '../../../../styles/colors';
 
 // Main Wrapper
-export const PageWrapper = styled.View``;
+export const PageWrapper = styled.ScrollView``;
 
 export const NotFoundText = styled.Text`
   font-size: 16px;
@@ -23,6 +23,18 @@ export const WidgetText = styled.Text`
 `;
 export const WidgetIcon = styled.View`
   font-size: 20px;
+`;
+
+export const PieceWrapper = styled.View`
+  width: 100%;
+  max-height: 100%;
+  background-color: #fff;
+  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 5px;
+  border-color: #eee;
+  border-bottom-width: 1px;
 `;
 
 // Top details
@@ -60,17 +72,7 @@ export const ServiceDate = styled.Text`
 `;
 
 // Center Details
-export const CenterDetails = styled.View`
-  width: 100%;
-  max-height: 100%;
-  background-color: #fff;
-  padding: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-bottom: 5px;
-  border-color: #eee;
-  border-bottom-width: 1px;
-`;
+export const CenterDetails = styled.View``;
 
 // Bottom Details
 export const BottomDetails = styled.View`
@@ -80,14 +82,36 @@ export const BottomDetails = styled.View`
   padding: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-color: #eee;
   border-bottom-width: 1px;
 `;
-
-export const Address = styled.View``;
+export const Address = styled.View`
+  max-width: 200px;
+`;
 export const AddressText = styled.Text`
   font-size: 16px;
   margin-bottom: 5px;
   color: ${colors.textColors.secondary};
+`;
+export const NoteText = styled.TextInput`
+  min-height: 50px;
+`;
+
+// Extra Details
+
+export const RowView = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 10px;
+`;
+
+export const Tag = styled.Text`
+  font-weight: bold;
+  font-size: 16px;
+  color: ${colors.textColors.secondary};
+`;
+export const Value = styled.Text`
+  font-size: 16px;
 `;

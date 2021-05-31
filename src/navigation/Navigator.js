@@ -32,7 +32,7 @@ const MainStackNavigator = () => {
   };
   return (
     <Navigator
-      initialRouteName="Home"
+      initialRouteName="Booking"
       tabBarOptions={{keyboardHidesTabBar: true}}>
       <Screen
         name="Login"

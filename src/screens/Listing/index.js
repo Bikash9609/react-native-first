@@ -21,7 +21,6 @@ import {AntDesign, Entypo} from '@expo/vector-icons';
 import {ScrollView} from 'react-native-gesture-handler';
 import _ from 'lodash';
 import {Rating} from 'react-native-ratings';
-import LottieView from 'lottie-react-native';
 
 import {setProfiles, setSelectedProfile} from '../../store/listing/reducers';
 import * as listingActions from '../../store/listing/actions';
@@ -180,16 +179,7 @@ export function Index({navigation}) {
           </Button>
         </Header>
 
-        {loading && (
-          <ListingStyled.LoaderContainer>
-            <ListingStyled.LoadingLottie
-              source={require('../assets/lottie/58560-work-from-home-chill.json')}
-              autoPlay
-              loop
-              
-            />
-          </ListingStyled.LoaderContainer>
-        )}
+        {loading && <Loader header="90%" />}
 
         {searchData?.data?.length > 0 ? (
           <View style={styles.searchSuggestion}>
