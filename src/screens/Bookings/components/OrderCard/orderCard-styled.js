@@ -11,6 +11,8 @@ export const CardWrapper = styled.View`
   margin-bottom: 0px;
   border-radius: 10px;
   box-shadow: 0 5px 10px #eee;
+  min-height: 120px;
+  padding-left: 25px;
 `;
 
 export const DisplayRow = styled.View`
@@ -49,11 +51,12 @@ export const Item = styled.View`
 `;
 
 export const Value = styled.Text`
+  font-size: 16px;
+  margin-top: 10px;
   color: ${(props) => props.textColor || colors.textColors.primary};
 `;
 
 export const Span = styled.Text`
-  font-size: 14px;
   font-weight: normal;
   color: ${(props) => props.textColor || colors.textColors.secondary};
 `;

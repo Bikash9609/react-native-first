@@ -254,7 +254,6 @@ export const api = {
   deleteProfile: '/customer/delete_profile',
 
   getOrders: '/customer/get_orders',
-
   createOrder: '/common/createOrder',
 };
 

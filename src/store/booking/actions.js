@@ -9,6 +9,7 @@ import {
   setSelectedBooking,
   setListEndPage,
   setPageNo,
+  selectBooking,
 } from './reducers';
 
 export const fetchBookings = (refresh) => async (dispatch, getState) => {
@@ -32,12 +33,26 @@ export const fetchBookings = (refresh) => async (dispatch, getState) => {
     }
 
     let items = data;
-    if (payload.page !== 0) {
+    if (payload.page !== 0 && allBookings?.length > 0) {
       items = [...allBookings, ...data];
     }
     dispatch(setBookings(items));
     dispatch(setPageNo(payload.page + 1));
   } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+export const fetchBookingById = (id) => async (dispatch) => {
+  try {
+    dispatch(setLoading());
+    dispatch(selectBooking(id));
+    const res = await API.post(`${URL.getOrders}/${id}`);
+    const {data, status} = res;
+
+    dispatch(setSelectedBooking(data));
+  } catch (error) {
+    console.log(error);
     dispatch(setError(error));
   }
 };

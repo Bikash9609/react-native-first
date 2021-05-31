@@ -16,8 +16,10 @@ import Search from '../screens/ComponentScreen';
 import Profile from '../screens/Profile';
 import Listing from '../screens/Listing';
 import Details from '../screens/Details';
-import Booking from '../screens/Bookings';
 import MapsView from '../screens/MapLocation';
+
+import Booking from '../screens/Bookings';
+import BookingDetails from '../screens/Bookings/components/Details';
 
 const MainStackNavigator = () => {
   const {Navigator, Screen} = createStackNavigator();
@@ -58,19 +60,11 @@ const MainStackNavigator = () => {
       />
       <Screen
         name="Booking"
-        component={Booking}
+        component={BookingsNavigator}
         options={{
           ...options,
-          headerShown: true,
-          tabBarVisible: true,
-          headerTitle: 'Bookings',
-          headerLeft: ({canGoBack, onPress}) => (
-            <HeaderBackButton
-              canGoBack={canGoBack}
-              disabled={!canGoBack}
-              onPress={onPress}
-            />
-          ),
+          headerShown: false,
+          animationEnabled: true,
         }}
       />
       <Screen
@@ -90,6 +84,57 @@ const MainStackNavigator = () => {
           headerShown: true,
           tabBarVisible: true,
           headerTitle: 'Search your location',
+          headerLeft: ({canGoBack, onPress}) => (
+            <HeaderBackButton
+              canGoBack={canGoBack}
+              disabled={!canGoBack}
+              onPress={onPress}
+            />
+          ),
+        }}
+      />
+    </Navigator>
+  );
+};
+
+const BookingsNavigator = () => {
+  const {Navigator, Screen} = createStackNavigator();
+  const options = {
+    initialRouteName: 'Booking',
+    activeColor: 'tomato',
+    inactiveColor: 'black',
+    barStyle: {backgroundColor: '#eee'},
+    shifting: true,
+  };
+  return (
+    <Navigator
+      initialRouteName="Bookings"
+      tabBarOptions={{keyboardHidesTabBar: true}}>
+      <Screen
+        name="Bookings"
+        component={Booking}
+        options={{
+          ...options,
+          headerShown: true,
+          tabBarVisible: true,
+          headerTitle: 'Bookings',
+          headerLeft: ({canGoBack, onPress}) => (
+            <HeaderBackButton
+              canGoBack={canGoBack}
+              disabled={!canGoBack}
+              onPress={onPress}
+            />
+          ),
+        }}
+      />
+      <Screen
+        name="Booking Details"
+        component={BookingDetails}
+        options={{
+          ...options,
+          headerShown: true,
+          tabBarVisible: true,
+          headerTitle: '',
           headerLeft: ({canGoBack, onPress}) => (
             <HeaderBackButton
               canGoBack={canGoBack}

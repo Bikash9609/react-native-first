@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -16,20 +17,38 @@ import Button from '../../components/Button';
 
 import * as BookingStyled from './bookings.styled';
 
-export const FooterComponent = ({hidePrevious, hideNext, onNextPage}) => {
-  return (
-    <BookingStyled.FooterWrapper>
-      {!hidePrevious && <Button fullWidth>Previous</Button>}
-      {!hideNext && (
-        <Button fullWidth onPress={onNextPage}>
-          Load more
-        </Button>
-      )}
-    </BookingStyled.FooterWrapper>
+export const FooterComponent = ({
+  hidePrevious,
+  hideNext,
+  onNextPage,
+  loading,
+  isLastPage,
+}) => {
+  const loadMoreButton = (
+    <Button fullWidth onPress={onNextPage}>
+      Load more
+    </Button>
   );
+  const loadPreviousButton = <Button fullWidth>Previous</Button>;
+
+  let component = (
+    <Text style={{padding: 10, textAlign: 'center', color: '#000000a1'}}>
+      No more bookings
+    </Text>
+  );
+
+  if (!loading && !isLastPage) {
+    component = loadMoreButton;
+  }
+
+  if (loading) {
+    component = <ActivityIndicator size={20} color="skyblue" />;
+  }
+
+  return <BookingStyled.FooterWrapper>{component}</BookingStyled.FooterWrapper>;
 };
 
-export default function Index() {
+export default function Index({navigation}) {
   const dispatch = useDispatch();
 
   const {loading, error, allBookings, pageNo, listEndPage} = useSelector(
@@ -51,16 +70,21 @@ export default function Index() {
 
   const onLoadMore = () => {
     if (pageNo === 0 || loading) return;
-    fetchBookings();
+    fetchBookings(false);
+  };
+
+  const onCardPress = (data) => {
+    dispatch(bookingActions.fetchBookingById(data._id));
+    navigation.navigate('Booking Details', {data});
   };
 
   const renderBookingItems = useCallback(
-    ({item}) => <ItemCard data={item} />,
+    ({item}) => <ItemCard onCardPress={() => onCardPress(item)} data={item} />,
     [allBookings],
   );
 
   useEffect(() => {
-    fetchBookings();
+    fetchBookings(true);
   }, []);
 
   const isLastPage = listEndPage && listEndPage === pageNo;
@@ -79,16 +103,13 @@ export default function Index() {
         data={allBookings}
         renderItem={renderBookingItems}
         showsVerticalScrollIndicator={false}
+        extraData={allBookings}
         ListFooterComponent={
-          (!loading && !isLastPage && (
-            <FooterComponent onNextPage={onLoadMore} hidePrevious />
-          )) ||
-          (isLastPage && (
-            <Text
-              style={{padding: 10, textAlign: 'center', color: '#000000a1'}}>
-              No more bookings
-            </Text>
-          ))
+          <FooterComponent
+            isLastPage={isLastPage}
+            loading={loading}
+            onNextPage={onLoadMore}
+          />
         }
       />
     </SafeAreaView>

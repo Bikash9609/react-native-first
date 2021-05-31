@@ -8,4 +8,5 @@ export const FooterWrapper = styled.View`
   padding: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+  height: 60px;
 `;

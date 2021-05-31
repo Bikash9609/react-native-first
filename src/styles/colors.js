@@ -21,7 +21,7 @@ export const lightTheme = {
   backgroundColor: '#ffffff',
 };
 
-export const darkTheme: AppTheme = {
+export const darkTheme = {
   backgroundColor: '#000000',
   textColor: '#fff',
   lightTextColor: '#b3b3b3',
