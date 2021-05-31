@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import {
   Header,
@@ -18,7 +19,6 @@ import {
 } from 'native-base';
 import {useDispatch, useSelector} from 'react-redux';
 import {AntDesign, Entypo} from '@expo/vector-icons';
-import {ScrollView} from 'react-native-gesture-handler';
 import _ from 'lodash';
 import {Rating} from 'react-native-ratings';
 import LottieView from 'lottie-react-native';

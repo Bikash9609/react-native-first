@@ -8,7 +8,6 @@ import {NavigationContainer, DefaultThemem} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import store, {persistedStore} from './src/store';
-import 'react-native-gesture-handler';
 import {primaryColor, secondaryColor} from './src/styles/components/colors';
 import {MainStackNavigator} from './src/navigation/Navigator.js';
 
