@@ -112,7 +112,7 @@ function ExtraDetails({data}) {
       />
       <RowViewInlineText
         tag="Payment mode:"
-        value={PAYMENT_TYPE[data?.paymentType].label}
+        value={PAYMENT_TYPE[data?.paymentType]?.label}
       />
     </DetailsStyled.PieceWrapper>
   );

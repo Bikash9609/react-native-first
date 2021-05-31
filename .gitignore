@@ -3,3 +3,4 @@ node_modules/**/*
 npm-debug.*
 .expo/*
 src/.DS_Store
+.DS_Store
