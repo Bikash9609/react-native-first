@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import * as bookingActions from '../../../../store/booking/actions';
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '../../../../constants/Globals';
-import Loader from '../../../../components/Loader';
+import Loader from 'components/Loader';
 import Button from '../../../../components/Button';
 import * as DetailsStyled from './details.styled';
 

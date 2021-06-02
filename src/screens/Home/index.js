@@ -150,6 +150,7 @@ class HomeScreen extends Component {
               ListFooterComponent={<ListFooterComponent />}
               itemDimension={100}
               data={data}
+              key={({ item }) => item.title}
               renderItem={({ item }) => (
                 <View>
                   <OnlyImageCard

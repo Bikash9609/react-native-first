@@ -1,87 +1,76 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { SafeAreaView, Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
-import { Header, Item, Input, Container, Button, Content, Left } from 'native-base';
+import { SafeAreaView, Text, View, FlatList } from 'react-native';
+import { Header, Item, Input, Button, Left, Tab, Tabs, TabHeading } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import _ from 'lodash';
-import { Rating } from 'react-native-ratings';
 
 import { setProfiles, setSelectedProfile } from '../../store/listing/reducers';
 import * as listingActions from '../../store/listing/actions';
 
 import Loader from '../../components/Loader/index';
+import Card from './components/Card';
 import SearchItem from './components/ListItem';
-import SearchLoadingLottie from '../assets/lottie/27773-hand-shake-business-deal.json';
 
 import { styles, gridStyles as gStyles } from './styles';
 import * as ListingStyled from './listing-styled';
+import { primaryColor } from 'styles/colors';
 
-const GridItem = ({ data, onPress }) => {
-  return (
-    <TouchableOpacity onPress={() => onPress(data?._id)} activeOpacity={0.8}>
-      <View style={gStyles.item}>
-        <View style={gStyles.left}>
-          <Image
-            source={{
-              uri: 'https://cdn.dribbble.com/users/155447/avatars/normal/cc39f2a5831c130e8e988b49d642cad9.png?1609199281',
-            }}
-            height="100%"
-            width="100%"
-            style={gStyles.avatar}
-            resizeMode="cover"
-          />
-        </View>
-        <View style={gStyles.right}>
-          <View style={gStyles.top}>
-            <Text style={gStyles.name} adjustsFontSizeToFit>
-              {data.name?.firstName} {data.name?.lastName}
-            </Text>
-            <Text style={gStyles.price} adjustsFontSizeToFit>
-              ₹{data.price} / day
-            </Text>
-          </View>
-          <View style={gStyles.ratingView}>
-            <Rating
-              fractions={1}
-              imageSize={20}
-              showReadOnlyText={false}
-              readonly
-              startingValue={data?.rating || 0}
-              ratingCount={5}
-            />
-            <Text style={gStyles.ratingText} adjustsFontSizeToFit>
-              ({data?.rating || 0}) (20+ ratings)
-            </Text>
-          </View>
-          <Text style={gStyles.description} adjustsFontSizeToFit>
-            {data?.bio.substring(0, 60)}...
-          </Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-function GridDisplay({ data, onPress, totalResults }) {
+function GridDisplay({ data, onPress, totalResults, headerComponent }) {
   return (
     <View style={gStyles.gridWrapper}>
+      <FlatList
+        ListHeaderComponent={headerComponent}
+        scrollEnabled
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(i) => i.item}
+        key={({ item }) => item._id}
+        data={data}
+        renderItem={({ item, index }) => <Card data={item} onPress={onPress} />}
+      />
+    </View>
+  );
+}
+
+export function HeaderComponent({ searchData, searchText, totalResults }) {
+  return (
+    <>
+      <View style={styles.searchSuggestion}>
+        <Text style={styles.searchLabelText}>
+          Showing results for "<Text style={styles.searchText}>{searchText}</Text>"
+        </Text>
+
+        <ScrollView
+          horizontal
+          scrollEnabled
+          style={{
+            minHeight: 40,
+            minWidth: '100%',
+            maxHeight: '100%',
+            width: '100%',
+            marginBottom: 10,
+          }}
+          showsHorizontalScrollIndicator={false}>
+          <View style={styles.tagsWrapper}>
+            <Text>Suggestions: </Text>
+            {searchData?.matchingKeywords?.map((item) => (
+              <Text style={styles.tag} key={item?._id}>
+                {item?.tag}
+              </Text>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
+
       <View style={gStyles.header}>
         <Text style={gStyles.gridHeaderLeft}>RESULTS</Text>
         <Text style={gStyles.gridHeaderRight}>
           {totalResults} matching {totalResults > 1 ? 'results' : 'result'}
         </Text>
       </View>
-
-      <FlatList
-        scrollEnabled
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(i) => i.item}
-        data={data}
-        renderItem={({ item, index }) => <GridItem data={item} onPress={onPress} />}
-      />
-    </View>
+    </>
   );
 }
 
@@ -157,38 +146,20 @@ export function Index({ navigation }) {
         {loading && <Loader header="90%" />}
 
         {searchData?.data?.length > 0 ? (
-          <View style={styles.searchSuggestion}>
-            <Text style={styles.searchLabelText}>
-              Showing results for "<Text style={styles.searchText}>{searchText}</Text>"
-            </Text>
-
-            <ScrollView
-              horizontal
-              scrollEnabled
-              style={{
-                minHeight: 40,
-                minWidth: '100%',
-                maxHeight: '100%',
-                width: '100%',
-                marginBottom: 10,
-              }}
-              showsHorizontalScrollIndicator={false}>
-              <View style={styles.tagsWrapper}>
-                <Text>Suggestions: </Text>
-                {searchData?.matchingKeywords?.map((item) => (
-                  <Text style={styles.tag} key={item?._id}>
-                    {item?.tag}
-                  </Text>
-                ))}
-              </View>
-            </ScrollView>
-
+          <>
             <GridDisplay
+              headerComponent={
+                <HeaderComponent
+                  searchData={searchData}
+                  searchText={searchText}
+                  totalResults={searchData?.totalResultsCount}
+                />
+              }
               data={searchData.data}
               totalResults={searchData?.totalResultsCount}
               onPress={onCardPress}
             />
-          </View>
+          </>
         ) : null}
       </View>
     </SafeAreaView>
