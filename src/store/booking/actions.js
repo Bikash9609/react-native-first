@@ -52,7 +52,7 @@ export const fetchBookingById = (id) => async (dispatch) => {
 
     dispatch(setSelectedBooking(data));
   } catch (error) {
-    console.log(error);
     dispatch(setError(error));
+    console.log(error);
   }
 };
