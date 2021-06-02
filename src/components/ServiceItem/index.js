@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
+import { View, Text, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import * as colors from '../../styles/colors';
 import Button from '../Button/';
@@ -38,8 +38,8 @@ const Index = ({
         </Text>
         <Button
           inverted
-          buttonStyle={styles({isAdded}).button}
-          textStyle={styles({isAdded}).buttonText}
+          buttonStyle={styles({ isAdded }).button}
+          textStyle={styles({ isAdded }).buttonText}
           onPress={onAdd}>
           {isAdded ? 'Remove' : 'Add service'}
         </Button>

@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {ListItem, Left, Right} from 'native-base';
-import {AntDesign, Entypo} from '@expo/vector-icons';
+import { Text } from 'react-native';
+import { ListItem, Left, Right } from 'native-base';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
-import {styles} from './style';
+import { styles } from './style';
 
-export default function index({text}) {
+export default function index({ text }) {
   return (
     <ListItem selected>
       <Left>

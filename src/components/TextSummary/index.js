@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Text} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text } from 'react-native';
 
-import {TEXT_SUMMARY} from '../../constants/Globals';
+import { TEXT_SUMMARY } from '../../constants/Globals';
 
-export default function TextSummary({string, longSummary = false, ...props}) {
+export default function TextSummary({ string, longSummary = false, ...props }) {
   const [summary, setSummary] = useState('');
   const [originalString, setOriginalString] = useState(string);
   const [showFullString, setShowFullString] = useState(false);
@@ -28,10 +28,7 @@ export default function TextSummary({string, longSummary = false, ...props}) {
   }, [string, originalString, longSummary, summary]);
 
   return (
-    <Text
-      {...props}
-      onPress={() => setShowFullString(!showFullString)}
-      selectable>
+    <Text {...props} onPress={() => setShowFullString(!showFullString)} selectable>
       {showFullString ? originalString : summary}
     </Text>
   );

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 export default function CarouselComp({
@@ -15,7 +9,7 @@ export default function CarouselComp({
   carouselHeight,
   ...rest
 }) {
-  const {height, width} = Dimensions.get('window');
+  const { height, width } = Dimensions.get('window');
   const _data = [
     {
       title: 'text',
@@ -30,7 +24,7 @@ export default function CarouselComp({
 
   const _renderItem = (item, index) => {
     return (
-      <View style={styles({carouselHeight}).slide}>
+      <View style={styles({ carouselHeight }).slide}>
         <ImageBackground
           source={{
             uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxmAmekGXJcSLKiQGdkLxeqz6lQCONqubZ5g&usqp=CAU',
@@ -52,10 +46,8 @@ export default function CarouselComp({
       <Carousel
         style={styles().carousel}
         data={data || _data}
-        renderItem={({item, index}) =>
-          notImageCarousel
-            ? renderComponent(item, index)
-            : _renderItem(item, index)
+        renderItem={({ item, index }) =>
+          notImageCarousel ? renderComponent(item, index) : _renderItem(item, index)
         }
         sliderWidth={width && width}
         sliderHeight={height && (30 / 100) * height}

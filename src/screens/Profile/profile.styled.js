@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Button} from 'native-base';
+import { Button } from 'native-base';
 import * as Colors from '../../styles/colors';
 
 export const LogoMainWrapper = styled.View`
@@ -47,8 +47,7 @@ export const AuthButton = styled(Button)`
   height: 60px;
   padding-right: 40px;
   margin-bottom: 20px;
-  background-color: ${(props) =>
-    props.loginButton ? Colors.primaryColor : '#fff'};
+  background-color: ${(props) => (props.loginButton ? Colors.primaryColor : '#fff')};
   border: 1px solid #eee;
   border-radius: 10px;
   box-shadow: 0 5px 5px #eee;

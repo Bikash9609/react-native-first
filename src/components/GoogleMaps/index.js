@@ -1,9 +1,9 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {View} from 'react-native';
-import {AntDesign} from '@expo/vector-icons';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {useNavigation} from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { View } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { useNavigation } from '@react-navigation/native';
 
 import * as coreActions from '../../store/core/reducers';
 
@@ -12,17 +12,17 @@ const MAPS_API_KEY = 'AIzaSyCvhvzKTxZANe_B3tapYFxgrqYbLqqC-sk';
 const Index = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {user} = useSelector((state) => ({
+  const { user } = useSelector((state) => ({
     user: state.auth.user,
   }));
 
   const homePlace = {
     description: 'Home',
-    geometry: {location: {lat: 48.8152937, lng: 2.4597668}},
+    geometry: { location: { lat: 48.8152937, lng: 2.4597668 } },
   };
   const workPlace = {
     description: 'Work',
-    geometry: {location: {lat: 48.8496818, lng: 2.2940881}},
+    geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
   };
 
   const onNewPlaceClick = (data, details) => {
@@ -49,10 +49,8 @@ const Index = () => {
           language: 'en',
           components: 'country:in',
         }}
-        textInputProps={{autoFocus: true}}
-        renderDescription={(row) =>
-          row.description || row.formatted_address || row.name
-        }
+        textInputProps={{ autoFocus: true }}
+        renderDescription={(row) => row.description || row.formatted_address || row.name}
         isRowScrollable
         currentLocation={true}
         currentLocationLabel="Current location"
@@ -68,7 +66,7 @@ const Index = () => {
               borderColor: '#ccc',
               borderBottomRightRadius: 10,
             }}>
-            <AntDesign name="search1" size={29} style={{color: '#000000a1'}} />
+            <AntDesign name="search1" size={29} style={{ color: '#000000a1' }} />
           </View>
         )}
         enablePoweredByContainer

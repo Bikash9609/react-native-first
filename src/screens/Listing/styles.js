@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import * as colors from '../../styles/colors';
 
 export const gridStyles = StyleSheet.create({
@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     maxHeight: '100%',
     backgroundColor: '#fff',
   },
-  header: {backgroundColor: '#fff'},
+  header: { backgroundColor: '#fff' },
   searchLabelText: {
     fontSize: 16,
     paddingTop: 0,

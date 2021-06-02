@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
@@ -27,16 +27,16 @@ const profileSlice = createSlice({
     setLoading(state) {
       state.loading = true;
     },
-    setError(state, {payload}) {
+    setError(state, { payload }) {
       state.error = payload;
       state.loading = false;
     },
-    setUser(state, {payload}) {
+    setUser(state, { payload }) {
       state.user = payload;
       state.loading = false;
       state.error = null;
     },
-    setDeleteProfile(state, {payload}) {
+    setDeleteProfile(state, { payload }) {
       state.deleteProfile = payload;
       state.isSetToDelete = true;
       state.loading = false;
@@ -44,6 +44,5 @@ const profileSlice = createSlice({
   },
 });
 
-export const {setLoading, setUser, onLogout, setDeleteProfile, setError} =
-  profileSlice.actions;
+export const { setLoading, setUser, onLogout, setDeleteProfile, setError } = profileSlice.actions;
 export default profileSlice.reducer;

@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
@@ -28,27 +28,27 @@ const listingReducer = createSlice({
         selectedProfile: null,
       };
     },
-    setLoading(state, {payload}) {
-      return {...state, loading: payload};
+    setLoading(state, { payload }) {
+      return { ...state, loading: payload };
     },
-    setProfiles(state, {payload}) {
-      return {...state, profiles: payload};
+    setProfiles(state, { payload }) {
+      return { ...state, profiles: payload };
     },
-    setError(state, {payload}) {
-      return {...state, error: payload};
+    setError(state, { payload }) {
+      return { ...state, error: payload };
     },
-    setQuery(state, {payload}) {
-      return {...state, query: payload};
+    setQuery(state, { payload }) {
+      return { ...state, query: payload };
     },
-    setSelectedProfile(state, {payload}) {
-      return {...state, selectedProfile: payload};
+    setSelectedProfile(state, { payload }) {
+      return { ...state, selectedProfile: payload };
     },
-    setServices(state, {payload}) {
+    setServices(state, { payload }) {
       state.services.items = payload.items;
       state.services.page = payload.page;
       state.services.loading = false;
     },
-    setServicesError(state, {payload}) {
+    setServicesError(state, { payload }) {
       state.services.error = payload;
       state.services.loading = false;
     },
@@ -56,7 +56,7 @@ const listingReducer = createSlice({
       state.services.loading = true;
     },
     clearSelectedProfile(state) {
-      return {...state, selectedProfile: null};
+      return { ...state, selectedProfile: null };
     },
   },
 });

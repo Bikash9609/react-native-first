@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
@@ -23,26 +23,26 @@ const bookingSlice = createSlice({
     setLoading(state) {
       state.loading = true;
     },
-    setError(state, {payload}) {
+    setError(state, { payload }) {
       state.error = payload;
       state.loading = false;
     },
-    setBookings(state, {payload}) {
+    setBookings(state, { payload }) {
       state.listEndPage = null;
       state.allBookings = payload;
       state.loading = false;
     },
-    setPageNo(state, {payload}) {
+    setPageNo(state, { payload }) {
       state.pageNo = payload;
     },
-    selectBooking(state, {payload}) {
+    selectBooking(state, { payload }) {
       state.selectedBookingId = payload;
     },
-    setSelectedBooking(state, {payload}) {
+    setSelectedBooking(state, { payload }) {
       state.selectedBooking = payload;
       state.loading = false;
     },
-    setListEndPage(state, {payload}) {
+    setListEndPage(state, { payload }) {
       state.listEndPage = payload;
       state.loading = false;
     },

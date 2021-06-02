@@ -1,19 +1,19 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, ImageBackground, Image, StatusBar} from 'react-native';
-import {Container, Text, View, Button} from 'native-base';
-import {LinearGradient} from 'expo-linear-gradient';
-import {AntDesign} from '@expo/vector-icons';
+import React, { useEffect } from 'react';
+import { StyleSheet, ImageBackground, Image, StatusBar } from 'react-native';
+import { Container, Text, View, Button } from 'native-base';
+import { LinearGradient } from 'expo-linear-gradient';
+import { AntDesign } from '@expo/vector-icons';
 
-import {buttonStyles} from '../../styles/components/index';
-import {MainContent} from '../../styles/auth-styles';
-import {primaryColor} from '../../styles/components/colors';
-import {useSelector} from 'react-redux';
+import { buttonStyles } from '../../styles/components/index';
+import { MainContent } from '../../styles/auth-styles';
+import { primaryColor } from '../../styles/components/colors';
+import { useSelector } from 'react-redux';
 
 const LOGO_URL =
   'https://res.cloudinary.com/seconde/image/upload/v1609942436/temp/Markar_Logo_500x500_Without_slogan_Text_HOLLOW_Transparent_k0n5kl.png';
 
-const auth = ({navigation}) => {
-  const {isUserLogged} = useSelector((state) => ({
+const auth = ({ navigation }) => {
+  const { isUserLogged } = useSelector((state) => ({
     isUserLogged: state.auth.isUserLogged,
     loading: state.auth.loading,
   }));
@@ -45,16 +45,12 @@ const auth = ({navigation}) => {
           }}>
           <LinearGradient
             // Background Linear Gradient
-            colors={[
-              'rgba(0,0,0,0.5)',
-              'rgba(255, 255, 255,0.1)',
-              primaryColor,
-            ]}
+            colors={['rgba(0,0,0,0.5)', 'rgba(255, 255, 255,0.1)', primaryColor]}
             style={{
               justifyContent: 'space-between',
               flex: 1,
             }}
-            start={{x: 0.01, y: 0.2, z: 0.6}}>
+            start={{ x: 0.01, y: 0.2, z: 0.6 }}>
             <View
               style={{
                 justifyContent: 'center',

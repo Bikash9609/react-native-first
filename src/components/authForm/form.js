@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, Text, Form, Input, Item, Button} from 'native-base';
-import {useForm, Controller} from 'react-hook-form';
-import {ScrollView} from 'react-native';
+import { View, Text, Form, Input, Item, Button } from 'native-base';
+import { useForm, Controller } from 'react-hook-form';
+import { ScrollView } from 'react-native';
 
-import {AntDesign} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-import {authForm} from '../../styles/components/form';
-import {buttonStyles, socialButtonStyles} from '../../styles/components/button';
-import {primaryColor} from '../../styles/components/colors';
+import { authForm } from '../../styles/components/form';
+import { buttonStyles, socialButtonStyles } from '../../styles/components/button';
+import { primaryColor } from '../../styles/components/colors';
 
 // REGEX
 const EMAIL_VALIDATION_REGEX =
@@ -16,8 +16,8 @@ const PASSWORD_VALIDATION_REGEX = new RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&amp;*])(?=.{8,})',
 );
 
-export const LoginForm = ({onSubmit}) => {
-  const {control, handleSubmit, errors} = useForm();
+export const LoginForm = ({ onSubmit }) => {
+  const { control, handleSubmit, errors } = useForm();
 
   const formSubmitHandler = (data) => {
     onSubmit(data);
@@ -45,7 +45,7 @@ export const LoginForm = ({onSubmit}) => {
                 message: 'Please enter a valid email address.',
               },
             }}
-            render={({onChange, value}) => (
+            render={({ onChange, value }) => (
               <Input
                 textContentType="emailAddress"
                 style={authForm.input}
@@ -63,11 +63,9 @@ export const LoginForm = ({onSubmit}) => {
             <Text style={authForm.errorFeedback}>{errors.email.message}</Text>
           </View>
         ) : (
-          <View style={{marginBottom: 25}}></View>
+          <View style={{ marginBottom: 25 }}></View>
         )}
-        <Item
-          style={{...authForm.regularInput}}
-          error={errors.password && true}>
+        <Item style={{ ...authForm.regularInput }} error={errors.password && true}>
           <Controller
             name="password"
             defaultValue=""
@@ -87,7 +85,7 @@ export const LoginForm = ({onSubmit}) => {
               // },
             }}
             control={control}
-            render={({onChange, value}) => (
+            render={({ onChange, value }) => (
               <Input
                 textContentType="password"
                 style={authForm.input}
@@ -104,16 +102,14 @@ export const LoginForm = ({onSubmit}) => {
         </Item>
         {errors.password ? (
           <View style={authForm.errorWrapper}>
+            <Text style={authForm.errorFeedback}>{errors.password.message}</Text>
             <Text style={authForm.errorFeedback}>
-              {errors.password.message}
-            </Text>
-            <Text style={authForm.errorFeedback}>
-              Note: Use at least 1 capital letter, lowercase letter, special
-              character ( (?=.*?[#?!@$%^&*-] ) and a numeric character.
+              Note: Use at least 1 capital letter, lowercase letter, special character (
+              (?=.*?[#?!@$%^&*-] ) and a numeric character.
             </Text>
           </View>
         ) : (
-          <View style={{marginBottom: 25}}></View>
+          <View style={{ marginBottom: 25 }}></View>
         )}
 
         <Button
@@ -135,27 +131,15 @@ export const LoginForm = ({onSubmit}) => {
       </View>
 
       <View style={authForm.socialLoginsWrapper}>
-        <Button
-          iconLeft
-          style={socialButtonStyles.google}
-          full
-          activeOpacity={0.8}>
+        <Button iconLeft style={socialButtonStyles.google} full activeOpacity={0.8}>
           <AntDesign name="google" size={24} color={'#fff'} />
           <Text>Google</Text>
         </Button>
-        <Button
-          style={socialButtonStyles.facebook}
-          iconLeft
-          full
-          activeOpacity={0.8}>
+        <Button style={socialButtonStyles.facebook} iconLeft full activeOpacity={0.8}>
           <AntDesign name="facebook-square" size={24} color={'#fff'} />
           <Text>Facebook</Text>
         </Button>
-        <Button
-          style={socialButtonStyles.twitter}
-          iconLeft
-          full
-          activeOpacity={0.8}>
+        <Button style={socialButtonStyles.twitter} iconLeft full activeOpacity={0.8}>
           <AntDesign name="twitter" size={24} color={'#fff'} />
           <Text>Twitter</Text>
         </Button>
@@ -165,7 +149,7 @@ export const LoginForm = ({onSubmit}) => {
 };
 
 export const SignupForm = () => {
-  const {control, handleSubmit, errors} = useForm();
+  const { control, handleSubmit, errors } = useForm();
 
   const formSubmitHandler = (data) => {
     console.log(data);
@@ -189,7 +173,7 @@ export const SignupForm = () => {
                 message: 'Please enter a valid email address.',
               },
             }}
-            render={({onChange, value}) => (
+            render={({ onChange, value }) => (
               <Input
                 textContentType="emailAddress"
                 style={authForm.input}
@@ -207,12 +191,9 @@ export const SignupForm = () => {
             <Text style={authForm.errorFeedback}>{errors.email.message}</Text>
           </View>
         ) : (
-          <View style={{marginBottom: 25}}></View>
+          <View style={{ marginBottom: 25 }}></View>
         )}
-        <Item
-          last
-          style={{...authForm.regularInput}}
-          error={errors.password && true}>
+        <Item last style={{ ...authForm.regularInput }} error={errors.password && true}>
           <Controller
             name="password"
             defaultValue=""
@@ -232,7 +213,7 @@ export const SignupForm = () => {
               },
             }}
             control={control}
-            render={({onChange, value}) => (
+            render={({ onChange, value }) => (
               <Input
                 textContentType="password"
                 style={authForm.input}
@@ -248,16 +229,14 @@ export const SignupForm = () => {
         </Item>
         {errors.password ? (
           <View style={authForm.errorWrapper}>
+            <Text style={authForm.errorFeedback}>{errors.password.message}</Text>
             <Text style={authForm.errorFeedback}>
-              {errors.password.message}
-            </Text>
-            <Text style={authForm.errorFeedback}>
-              Note: Use at least 1 capital letter, lowercase letter, special
-              character ( (?=.*?[#?!@$%^&*-] ) and a numeric character.
+              Note: Use at least 1 capital letter, lowercase letter, special character (
+              (?=.*?[#?!@$%^&*-] ) and a numeric character.
             </Text>
           </View>
         ) : (
-          <View style={{marginBottom: 25}}></View>
+          <View style={{ marginBottom: 25 }}></View>
         )}
 
         <Button
@@ -279,27 +258,15 @@ export const SignupForm = () => {
       </View>
 
       <View style={authForm.socialLoginsWrapper}>
-        <Button
-          iconLeft
-          style={socialButtonStyles.google}
-          full
-          activeOpacity={0.8}>
+        <Button iconLeft style={socialButtonStyles.google} full activeOpacity={0.8}>
           <AntDesign name="google" size={24} color={'#fff'} />
           <Text>Google</Text>
         </Button>
-        <Button
-          style={socialButtonStyles.facebook}
-          iconLeft
-          full
-          activeOpacity={0.8}>
+        <Button style={socialButtonStyles.facebook} iconLeft full activeOpacity={0.8}>
           <AntDesign name="facebook-square" size={24} color={'#fff'} />
           <Text>Facebook</Text>
         </Button>
-        <Button
-          style={socialButtonStyles.twitter}
-          iconLeft
-          full
-          activeOpacity={0.8}>
+        <Button style={socialButtonStyles.twitter} iconLeft full activeOpacity={0.8}>
           <AntDesign name="twitter" size={24} color={'#fff'} />
           <Text>Twitter</Text>
         </Button>

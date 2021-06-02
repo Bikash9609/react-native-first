@@ -1,38 +1,23 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  Header,
-  Item,
-  Input,
-  Container,
-  Button,
-  Content,
-  Left,
-} from 'native-base';
-import {useDispatch, useSelector} from 'react-redux';
-import {AntDesign, Entypo} from '@expo/vector-icons';
-import {ScrollView} from 'react-native-gesture-handler';
+import React, { useState, useCallback, useEffect } from 'react';
+import { SafeAreaView, Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
+import { Header, Item, Input, Container, Button, Content, Left } from 'native-base';
+import { useDispatch, useSelector } from 'react-redux';
+import { AntDesign, Entypo } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
 import _ from 'lodash';
-import {Rating} from 'react-native-ratings';
+import { Rating } from 'react-native-ratings';
 
-import {setProfiles, setSelectedProfile} from '../../store/listing/reducers';
+import { setProfiles, setSelectedProfile } from '../../store/listing/reducers';
 import * as listingActions from '../../store/listing/actions';
 
 import Loader from '../../components/Loader/index';
 import SearchItem from './components/ListItem';
 import SearchLoadingLottie from '../assets/lottie/27773-hand-shake-business-deal.json';
 
-import {styles, gridStyles as gStyles} from './styles';
+import { styles, gridStyles as gStyles } from './styles';
 import * as ListingStyled from './listing-styled';
 
-const GridItem = ({data, onPress}) => {
+const GridItem = ({ data, onPress }) => {
   return (
     <TouchableOpacity onPress={() => onPress(data?._id)} activeOpacity={0.8}>
       <View style={gStyles.item}>
@@ -78,7 +63,7 @@ const GridItem = ({data, onPress}) => {
   );
 };
 
-function GridDisplay({data, onPress, totalResults}) {
+function GridDisplay({ data, onPress, totalResults }) {
   return (
     <View style={gStyles.gridWrapper}>
       <View style={gStyles.header}>
@@ -94,18 +79,16 @@ function GridDisplay({data, onPress, totalResults}) {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(i) => i.item}
         data={data}
-        renderItem={({item, index}) => (
-          <GridItem data={item} onPress={onPress} />
-        )}
+        renderItem={({ item, index }) => <GridItem data={item} onPress={onPress} />}
       />
     </View>
   );
 }
 
-export function Index({navigation}) {
+export function Index({ navigation }) {
   const dispatch = useDispatch();
 
-  const {searchData, loading} = useSelector((state) => ({
+  const { searchData, loading } = useSelector((state) => ({
     searchData: state.listing.profiles,
     loading: state.listing.loading,
   }));
@@ -146,7 +129,7 @@ export function Index({navigation}) {
 
   const onCardPress = (id) => {
     dispatch(listingActions.searchProfilesById(id));
-    navigation.navigate('Details', {userId: id});
+    navigation.navigate('Details', { userId: id });
   };
 
   return (
@@ -154,20 +137,12 @@ export function Index({navigation}) {
       <View style={styles.scrollView}>
         <Header searchBar transparent androidStatusBarColor="orange">
           <Left style={styles.backButton}>
-            <Entypo
-              name="chevron-left"
-              size={32}
-              onPress={() => navigation.navigate('Home')}
-            />
+            <Entypo name="chevron-left" size={32} onPress={() => navigation.navigate('Home')} />
           </Left>
 
           <Item style={styles.searchInput}>
             <AntDesign name="search1" size={19} />
-            <Input
-              placeholder="Search"
-              value={searchText}
-              onChangeText={onChangeText}
-            />
+            <Input placeholder="Search" value={searchText} onChangeText={onChangeText} />
             <AntDesign
               name={!searchText ? '' : 'closecircleo'}
               size={22}
@@ -184,8 +159,7 @@ export function Index({navigation}) {
         {searchData?.data?.length > 0 ? (
           <View style={styles.searchSuggestion}>
             <Text style={styles.searchLabelText}>
-              Showing results for "
-              <Text style={styles.searchText}>{searchText}</Text>"
+              Showing results for "<Text style={styles.searchText}>{searchText}</Text>"
             </Text>
 
             <ScrollView

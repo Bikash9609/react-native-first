@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {lightTheme, primaryColor, secondaryColor} from '../colors';
-import {text} from '../globals';
+import { StyleSheet } from 'react-native';
+import { lightTheme, primaryColor, secondaryColor } from '../colors';
+import { text } from '../globals';
 
 export const homeStyles = StyleSheet.create({
   cardsWrapper: {

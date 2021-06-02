@@ -22,7 +22,7 @@ export const post = async (url, data, skipToken) => {
   if (!skipToken) {
     token = await SecureStore.getItemAsync('token');
   }
-  const payload = skipToken ? {...data} : {...data, token};
+  const payload = skipToken ? { ...data } : { ...data, token };
   return axios.post(url, payload);
 };
 

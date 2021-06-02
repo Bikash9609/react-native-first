@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Button, Text} from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Button, Text } from 'native-base';
 
 import * as colors from '../../styles/colors';
 
@@ -21,8 +21,8 @@ function Index({
     <Button
       style={[
         inverted
-          ? styles({boldText, elevation, disabled}).inverted
-          : styles({boldText, elevation, disabled}).button,
+          ? styles({ boldText, elevation, disabled }).inverted
+          : styles({ boldText, elevation, disabled }).button,
         buttonStyle,
       ]}
       full={fullWidth}
@@ -31,8 +31,8 @@ function Index({
       <Text
         style={[
           inverted
-            ? styles({boldText, biggerFont, upperCase}).invertedText
-            : styles({boldText, biggerFont, upperCase}).buttonText,
+            ? styles({ boldText, biggerFont, upperCase }).invertedText
+            : styles({ boldText, biggerFont, upperCase }).buttonText,
           textStyle,
         ]}>
         {children}
@@ -62,9 +62,7 @@ export const styles = (props) =>
     },
 
     button: {
-      backgroundColor: props?.disabled
-        ? colors.primaryLightColor
-        : colors.primaryColor,
+      backgroundColor: props?.disabled ? colors.primaryLightColor : colors.primaryColor,
       borderRadius: 7,
       padding: 10,
       paddingHorizontal: 0,

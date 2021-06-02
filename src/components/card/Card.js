@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import {
   Card,
   CardItem,
@@ -11,7 +11,7 @@ import {
   Right,
   View,
 } from 'native-base';
-import {Image, ScrollView, StyleSheet} from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 
 // ICONS
 import AntD from 'react-native-vector-icons/AntDesign';
@@ -20,23 +20,17 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 // STYLES
-import {
-  OnlyImageCardStyles,
-  CustomCardStyles,
-} from '../../styles/components/cards';
-import {primaryColor, secondaryColor} from '../../styles/components/colors';
+import { OnlyImageCardStyles, CustomCardStyles } from '../../styles/components/cards';
+import { primaryColor, secondaryColor } from '../../styles/components/colors';
 import Ripple from 'react-native-material-ripple';
 
-export const OnlyImageCard = ({imageUrl, title, onClick}) => {
+export const OnlyImageCard = ({ imageUrl, title, onClick }) => {
   return (
     <Card style={OnlyImageCardStyles.wrapper}>
       <Ripple rippleContainerBorderRadius={25} onPress={onClick}>
-        <CardItem
-          cardBody
-          style={OnlyImageCardStyles.cardBody}
-          onPress={onClick}>
+        <CardItem cardBody style={OnlyImageCardStyles.cardBody} onPress={onClick}>
           <Image
-            source={{uri: imageUrl}}
+            source={{ uri: imageUrl }}
             style={{
               height: 100,
               width: '100%',
@@ -62,7 +56,7 @@ export const OnlyImageCard = ({imageUrl, title, onClick}) => {
   );
 };
 
-export const CustomCard = ({imageUrl, styles, onClick}) => {
+export const CustomCard = ({ imageUrl, styles, onClick }) => {
   return (
     <Card
       style={{
@@ -91,21 +85,15 @@ export const CustomCard = ({imageUrl, styles, onClick}) => {
   );
 };
 
-export default function card({
-  postText,
-  postSummaryText,
-  postLocation,
-  postBidCount,
-}) {
+export default function card({ postText, postSummaryText, postLocation, postBidCount }) {
   return (
     <Card style={styles.card} noShadow>
       <CardItem cardBody>
         <Image
           source={{
-            uri:
-              'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+            uri: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
           }}
-          style={{flex: 1, width: null, height: 300}}></Image>
+          style={{ flex: 1, width: null, height: 300 }}></Image>
       </CardItem>
       <CardItem header button onPress={() => alert('Hi')}>
         <Text style={styles.postText}>{postText}</Text>
@@ -144,11 +132,7 @@ export default function card({
         <Left style={styles.cardItem}>
           <Button transparent>
             <Icon active>
-              <FontAwesome
-                name="bookmark-o"
-                style={styles.icon}
-                color="#1b1b2f"
-              />
+              <FontAwesome name="bookmark-o" style={styles.icon} color="#1b1b2f" />
             </Icon>
           </Button>
 
@@ -222,7 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     color: '#e43f5a',
   },
-  postText: {fontSize: 19, fontWeight: '600'},
+  postText: { fontSize: 19, fontWeight: '600' },
   smallIcon: {
     fontSize: 15,
   },

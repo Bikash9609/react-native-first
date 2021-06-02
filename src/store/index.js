@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux';
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
   persistReducer,
   persistStore,

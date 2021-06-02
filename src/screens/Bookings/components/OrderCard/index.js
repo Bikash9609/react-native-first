@@ -1,28 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-import {TouchableOpacity} from 'react-native';
-import {Entypo} from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
 import RippleWrapper from 'react-native-material-ripple';
 
-import {ORDER_STATUS} from '../../../../constants/Globals';
+import { ORDER_STATUS } from '../../../../constants/Globals';
 import * as OrderCard from './orderCard-styled';
 
-const Item = ({
-  label,
-  textColor,
-  noBottomMargin,
-  onPress,
-  children,
-  ...props
-}) => {
+const Item = ({ label, textColor, noBottomMargin, onPress, children, ...props }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <OrderCard.DisplayRow
-        marginBottom={noBottomMargin ? '0px' : '10px'}
-        {...props}>
-        <OrderCard.Span textColor={textColor}>
-          {label.toUpperCase()}
-        </OrderCard.Span>
+      <OrderCard.DisplayRow marginBottom={noBottomMargin ? '0px' : '10px'} {...props}>
+        <OrderCard.Span textColor={textColor}>{label.toUpperCase()}</OrderCard.Span>
         <OrderCard.Value textColor={textColor}>{children}</OrderCard.Value>
       </OrderCard.DisplayRow>
     </TouchableOpacity>
@@ -30,7 +19,7 @@ const Item = ({
 };
 
 // TODO: change order status to only five global status in server
-const BelowTitleComponentSelector = ({orderStatus, data}) => {
+const BelowTitleComponentSelector = ({ orderStatus, data }) => {
   let component = null;
   console.log(ORDER_STATUS[orderStatus]);
   switch (ORDER_STATUS[orderStatus]) {
@@ -39,19 +28,14 @@ const BelowTitleComponentSelector = ({orderStatus, data}) => {
       component = (
         <Item label="" textColor={ORDER_STATUS[orderStatus]?.color}>
           {data?.serviceDate &&
-            moment(data?.serviceDate)
-              .format('DD MMMM, YYYY hh:mm A')
-              .toString()}
+            moment(data?.serviceDate).format('DD MMMM, YYYY hh:mm A').toString()}
         </Item>
       );
       break;
 
     case ORDER_STATUS.onWay:
       component = (
-        <Item
-          label=""
-          textColor={ORDER_STATUS[orderStatus]?.color}
-          marginBottom="5px">
+        <Item label="" textColor={ORDER_STATUS[orderStatus]?.color} marginBottom="5px">
           {ORDER_STATUS[orderStatus]?.value}
         </Item>
       );
@@ -72,7 +56,7 @@ const BelowTitleComponentSelector = ({orderStatus, data}) => {
   return component;
 };
 
-export default function Index({data, onCardPress}) {
+export default function Index({ data, onCardPress }) {
   return (
     <RippleWrapper onPress={onCardPress}>
       <OrderCard.CardWrapper>
@@ -84,12 +68,9 @@ export default function Index({data, onCardPress}) {
           />
           <OrderCard.Item>
             <OrderCard.CardHeader>{data?.name}</OrderCard.CardHeader>
-            <BelowTitleComponentSelector
-              data={data}
-              orderStatus={data?.orderStatus}
-            />
+            <BelowTitleComponentSelector data={data} orderStatus={data?.orderStatus} />
           </OrderCard.Item>
-          <OrderCard.Item style={{flex: 1, alignItems: 'flex-end'}}>
+          <OrderCard.Item style={{ flex: 1, alignItems: 'flex-end' }}>
             <Entypo name="chevron-right" size={20} />
           </OrderCard.Item>
         </OrderCard.DisplayRow>

@@ -10,8 +10,8 @@ import {
   setServicesLoading,
   clearSelectedProfile,
 } from './reducers';
-import {publicUrls as URL} from '../../constants/Globals';
-import {post, get} from '../../axios';
+import { publicUrls as URL } from '../../constants/Globals';
+import { post, get } from '../../axios';
 
 export function searchProfiles(category, page) {
   return async (dispatch) => {

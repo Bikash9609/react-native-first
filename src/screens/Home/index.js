@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import {View, SafeAreaView} from 'react-native';
-import {Button, Icon, Item, Text} from 'native-base';
-import {StatusBar} from 'react-native';
-import {FlatGrid} from 'react-native-super-grid';
+import React, { Component } from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { Button, Icon, Item, Text } from 'native-base';
+import { StatusBar } from 'react-native';
+import { FlatGrid } from 'react-native-super-grid';
 import Ripple from 'react-native-material-ripple';
-import {Ionicons} from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
-import {primaryColor} from '../../styles/colors';
-import {homeStyles} from '../../styles/screens/home-screen';
-import {text} from '../../styles/globals';
-import {OnlyImageCard, CustomCard} from '../../components/card/Card';
-import {home} from '../../constants/screens/home-screen';
+import { primaryColor } from '../../styles/colors';
+import { homeStyles } from '../../styles/screens/home-screen';
+import { text } from '../../styles/globals';
+import { OnlyImageCard, CustomCard } from '../../components/card/Card';
+import { home } from '../../constants/screens/home-screen';
 
 import * as HomeStyled from './home.styled';
 
@@ -35,12 +35,11 @@ function ListFooterComponent({}) {
         <Text style={text.headerText}>Local people from around you</Text>
         <CustomCard
           imageUrl={require('../assets/Home/Images/4011311.jpg')}
-          styles={{resizeMode: 'center'}}
+          styles={{ resizeMode: 'center' }}
         />
 
-        <Text style={{...text.textSecondary}}>
-          Choose service providers from locals around you to do your work.
-          People who you can trust.
+        <Text style={{ ...text.textSecondary }}>
+          Choose service providers from locals around you to do your work. People who you can trust.
         </Text>
       </View>
 
@@ -53,12 +52,12 @@ function ListFooterComponent({}) {
         <Text style={text.headerText}>7 days free follow-up</Text>
         <CustomCard
           imageUrl={require('../assets/Home/Images/4011311.jpg')}
-          styles={{resizeMode: 'center'}}
+          styles={{ resizeMode: 'center' }}
         />
 
-        <Text style={{...text.textSecondary}}>
-          Free 7 days follow up for registered* for completed services. You can
-          raise a request if you are not satisfied in between the time.
+        <Text style={{ ...text.textSecondary }}>
+          Free 7 days follow up for registered* for completed services. You can raise a request if
+          you are not satisfied in between the time.
         </Text>
       </View>
     </>
@@ -72,37 +71,35 @@ class HomeScreen extends Component {
 
   handleScroll = (event) => {
     const layout = event.nativeEvent.contentOffset.y;
-    this.setState({heightFromTop: layout});
+    this.setState({ heightFromTop: layout });
   };
 
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     const data = [
-      {imageUrl: home.doctor, title: 'Doctor'},
-      {imageUrl: home.electrician, title: 'Electrician'},
-      {imageUrl: home.tilesWork, title: 'Tiles Worker'},
-      {imageUrl: home.tutor, title: 'Tutor'},
-      {imageUrl: home.plumber, title: 'Plumber'},
-      {imageUrl: home.architect, title: 'Architect'},
-      {imageUrl: home.tutor, title: 'Tutor'},
-      {imageUrl: home.architect, title: 'Architect'},
-      {imageUrl: home.plumber, title: 'Plumber'},
+      { imageUrl: home.doctor, title: 'Doctor' },
+      { imageUrl: home.electrician, title: 'Electrician' },
+      { imageUrl: home.tilesWork, title: 'Tiles Worker' },
+      { imageUrl: home.tutor, title: 'Tutor' },
+      { imageUrl: home.plumber, title: 'Plumber' },
+      { imageUrl: home.architect, title: 'Architect' },
+      { imageUrl: home.tutor, title: 'Tutor' },
+      { imageUrl: home.architect, title: 'Architect' },
+      { imageUrl: home.plumber, title: 'Plumber' },
     ];
 
     return (
       <>
         <StatusBar backgroundColor={primaryColor} />
-        <SafeAreaView style={{backgroundColor: 'transparent'}}>
+        <SafeAreaView style={{ backgroundColor: 'transparent' }}>
           <HomeStyled.TopHeader>
-            <HomeStyled.GradientViewStyled
-              colors={['#0481bb', primaryColor]}
-              end={[1.2, 1.5]}>
+            <HomeStyled.GradientViewStyled colors={['#0481bb', primaryColor]} end={[1.2, 1.5]}>
               <HomeStyled.TopHeaderImage
                 resizeMode="contain"
                 source={require('../assets/images/header_logo_new.png')}
               />
               <HomeStyled.TopHeaderRight>
-                <Button transparent style={{marginRight: 10}}>
+                <Button transparent style={{ marginRight: 10 }}>
                   <Ionicons
                     name={'heart-outline'}
                     size={25}
@@ -126,13 +123,9 @@ class HomeScreen extends Component {
                 onPress={() => navigate('Listing')}
                 style={[
                   homeStyles.SearchBar,
-                  this.state.heightFromTop > 59
-                    ? homeStyles.searchBarOnScroll
-                    : null,
+                  this.state.heightFromTop > 59 ? homeStyles.searchBarOnScroll : null,
                 ]}>
-                <Text style={{padding: 10, height: 45, width: '90%'}}>
-                  Search
-                </Text>
+                <Text style={{ padding: 10, height: 45, width: '90%' }}>Search</Text>
                 <Icon name="ios-search" />
               </Item>
             </HomeStyled.HomeSearch>
@@ -151,15 +144,13 @@ class HomeScreen extends Component {
                 <>
                   <ListHeaderComponent />
                   <Text style={text.headerText}>All services</Text>
-                  <Text style={text.textSecondary}>
-                    Select a service to view more categories
-                  </Text>
+                  <Text style={text.textSecondary}>Select a service to view more categories</Text>
                 </>
               }
               ListFooterComponent={<ListFooterComponent />}
               itemDimension={100}
               data={data}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <View>
                   <OnlyImageCard
                     imageUrl={item.imageUrl}

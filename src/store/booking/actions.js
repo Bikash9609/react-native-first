@@ -1,5 +1,5 @@
 import * as API from '../../axios';
-import {api as URL} from '../../constants/Globals';
+import { api as URL } from '../../constants/Globals';
 
 import {
   clearState,
@@ -14,7 +14,7 @@ import {
 
 export const fetchBookings = (refresh) => async (dispatch, getState) => {
   const {
-    booking: {pageNo, allBookings},
+    booking: { pageNo, allBookings },
   } = getState();
   try {
     dispatch(setLoading());
@@ -24,7 +24,7 @@ export const fetchBookings = (refresh) => async (dispatch, getState) => {
     };
 
     const res = await API.post(URL.getOrders, payload);
-    const {data, status} = res;
+    const { data, status } = res;
 
     if (status !== 'OK') throw Error('Some error ocurred!');
 
@@ -48,7 +48,7 @@ export const fetchBookingById = (id) => async (dispatch) => {
     dispatch(setLoading());
     dispatch(selectBooking(id));
     const res = await API.post(`${URL.getOrders}/${id}`);
-    const {data, status} = res;
+    const { data, status } = res;
 
     dispatch(setSelectedBooking(data));
   } catch (error) {

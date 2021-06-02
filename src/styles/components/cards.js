@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {lightTheme, primaryColor, secondaryColor} from './colors';
+import { StyleSheet } from 'react-native';
+import { lightTheme, primaryColor, secondaryColor } from './colors';
 
 export const OnlyImageCardStyles = StyleSheet.create({
   wrapper: {

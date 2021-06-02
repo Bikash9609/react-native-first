@@ -1,12 +1,6 @@
-import axios, {post} from '../../axios';
-import {api as URLS} from '../../constants/Globals';
-import {
-  onLogout,
-  setDeleteProfile,
-  setError,
-  setLoading,
-  setUser,
-} from './reducers';
+import axios, { post } from '../../axios';
+import { api as URLS } from '../../constants/Globals';
+import { onLogout, setDeleteProfile, setError, setLoading, setUser } from './reducers';
 
 export function fetchUserProfile() {
   return async (dispatch) => {
@@ -20,7 +14,7 @@ export function fetchUserProfile() {
 
       dispatch(setUser(res.fetchedUser));
     } catch (error) {
-      dispatch(setError({error: JSON.stringify(error)}));
+      dispatch(setError({ error: JSON.stringify(error) }));
     }
   };
 }
@@ -38,12 +32,12 @@ export function updateProfile(data) {
       }
       dispatch(setUser(res));
     } catch (error) {
-      dispatch(setError({error: JSON.stringify(error)}));
+      dispatch(setError({ error: JSON.stringify(error) }));
     }
   };
 }
 
-export function deleteProfile({token, password}) {
+export function deleteProfile({ token, password }) {
   return async (dispatch) => {
     dispatch(setLoading());
     try {
@@ -55,10 +49,10 @@ export function deleteProfile({token, password}) {
         new Error('Some error occurred. Please try again!');
       }
 
-      const {data} = res;
+      const { data } = res;
       dispatch(setDeleteProfile(data));
     } catch (error) {
-      dispatch(setError({error: JSON.stringify(error)}));
+      dispatch(setError({ error: JSON.stringify(error) }));
     }
   };
 }
@@ -70,13 +64,12 @@ export const clearProfile = () => async (dispatch) => {
 
 export const updateTags = (payload) => async (dispatch, getState) => {
   const {
-    profile: {user},
+    profile: { user },
   } = getState();
   try {
     const res = await post(URLS.addTags, payload);
-    if (!res)
-      throw Error('Some error ocurred. Please refresh page and try again');
-    const updatedData = {...user, tags: res.tags};
+    if (!res) throw Error('Some error ocurred. Please refresh page and try again');
+    const updatedData = { ...user, tags: res.tags };
     dispatch(setUser(updatedData));
   } catch (error) {}
 };

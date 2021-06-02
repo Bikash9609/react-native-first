@@ -1,19 +1,14 @@
 import * as API from '../../axios';
-import {
-  userAuthFail,
-  userAuthStart,
-  userAuthSuccess,
-  userLogout as useLogout,
-} from './reducers';
+import { userAuthFail, userAuthStart, userAuthSuccess, userLogout as useLogout } from './reducers';
 import URL from '../../constants/Globals';
 import jwtDecode from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
 
-export function userLogin({email, password}) {
+export function userLogin({ email, password }) {
   return async (dispatch) => {
     dispatch(userAuthStart());
     try {
-      const res = await API.post(URL.login, {email, password}, true);
+      const res = await API.post(URL.login, { email, password }, true);
       if (!res) {
         throw new Error('Problem logging in! Please try again.');
       }
@@ -23,9 +18,9 @@ export function userLogin({email, password}) {
       const userType = decodedToken.userType;
 
       await SecureStore.setItemAsync('token', res.token);
-      dispatch(userAuthSuccess({...res, tokenExp: exp, viewType: userType}));
+      dispatch(userAuthSuccess({ ...res, tokenExp: exp, viewType: userType }));
     } catch (error) {
-      dispatch(userAuthFail({error: JSON.stringify(error)}));
+      dispatch(userAuthFail({ error: JSON.stringify(error) }));
     }
   };
 }
@@ -33,10 +28,10 @@ export function userLogin({email, password}) {
 export function pageRefreshPersist() {
   return async (dispatch, getState) => {
     const {
-      auth: {user},
+      auth: { user },
     } = getState();
     try {
-      const data = {userId: null, token: null};
+      const data = { userId: null, token: null };
 
       data.userId = user?.userId;
       data.token = user?.token;
@@ -52,7 +47,7 @@ export function pageRefreshPersist() {
       if (!res || res.status !== 200) {
         throw new Error('Could not login!');
       }
-      const {name, userName, email} = res.data.fetchedUser;
+      const { name, userName, email } = res.data.fetchedUser;
       const updatedData = {
         name,
         userName,

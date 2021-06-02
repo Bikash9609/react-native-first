@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   location: null,
@@ -9,13 +9,13 @@ const listingReducer = createSlice({
   initialState,
   reducers: {
     clearState() {
-      return {...state, location: null};
+      return { ...state, location: null };
     },
-    setLocation(state, {payload}) {
-      return {...state, location: payload};
+    setLocation(state, { payload }) {
+      return { ...state, location: payload };
     },
   },
 });
 
-export const {setLocation, clearLocation} = listingReducer.actions;
+export const { setLocation, clearLocation } = listingReducer.actions;
 export default listingReducer.reducer;

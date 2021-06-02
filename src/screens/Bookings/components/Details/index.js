@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {MaterialCommunityIcons, AntDesign} from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import moment from 'moment';
 
 import * as bookingActions from '../../../../store/booking/actions';
-import {PAYMENT_STATUS, PAYMENT_TYPE} from '../../../../constants/Globals';
+import { PAYMENT_STATUS, PAYMENT_TYPE } from '../../../../constants/Globals';
 import Loader from '../../../../components/Loader';
 import Button from '../../../../components/Button';
 import * as DetailsStyled from './details.styled';
 
-function Widget({icon, text, onPress}) {
+function Widget({ icon, text, onPress }) {
   return (
     <DetailsStyled.Widget onPress={onPress} rippleOpacity={0.03}>
       <DetailsStyled.WidgetText>{text}</DetailsStyled.WidgetText>
@@ -20,18 +20,16 @@ function Widget({icon, text, onPress}) {
   );
 }
 
-function Address({address}) {
+function Address({ address }) {
   return (
     <DetailsStyled.Address>
-      <DetailsStyled.AddressText>
-        {address?.addressText}
-      </DetailsStyled.AddressText>
+      <DetailsStyled.AddressText>{address?.addressText}</DetailsStyled.AddressText>
       <DetailsStyled.AddressText>(+91) 81204 23222</DetailsStyled.AddressText>
     </DetailsStyled.Address>
   );
 }
 
-function TopDetails({data}) {
+function TopDetails({ data }) {
   return (
     <DetailsStyled.TopDetails>
       <DetailsStyled.MainImage
@@ -49,7 +47,7 @@ function TopDetails({data}) {
   );
 }
 
-function CenterDetails({data}) {
+function CenterDetails({ data }) {
   const [showAdditionalService, setShowAdditionalServices] = useState(true);
   return (
     <DetailsStyled.CenterDetails>
@@ -57,9 +55,7 @@ function CenterDetails({data}) {
         <Widget
           icon={
             <MaterialCommunityIcons
-              name={
-                showAdditionalService ? 'collapse-all' : 'collapse-all-outline'
-              }
+              name={showAdditionalService ? 'collapse-all' : 'collapse-all-outline'}
               size={29}
               color="rgba(0, 0, 0, 0.8)"
             />
@@ -68,9 +64,7 @@ function CenterDetails({data}) {
           onPress={() => setShowAdditionalServices(!showAdditionalService)}
         />
         {!data?.additionalServices && showAdditionalService && (
-          <DetailsStyled.NotFoundText>
-            No additional services
-          </DetailsStyled.NotFoundText>
+          <DetailsStyled.NotFoundText>No additional services</DetailsStyled.NotFoundText>
         )}
       </DetailsStyled.PieceWrapper>
       <DetailsStyled.PieceWrapper>
@@ -85,7 +79,7 @@ function CenterDetails({data}) {
           maxRow={2}
           maxLength={120}
         />
-        <Button fullWidth inverted buttonStyle={{marginTop: 10}}>
+        <Button fullWidth inverted buttonStyle={{ marginTop: 10 }}>
           Send note
         </Button>
       </DetailsStyled.PieceWrapper>
@@ -93,7 +87,7 @@ function CenterDetails({data}) {
   );
 }
 
-function RowViewInlineText({tag, value}) {
+function RowViewInlineText({ tag, value }) {
   return (
     <DetailsStyled.RowView>
       <DetailsStyled.Tag>{tag} </DetailsStyled.Tag>
@@ -102,23 +96,17 @@ function RowViewInlineText({tag, value}) {
   );
 }
 
-function ExtraDetails({data}) {
+function ExtraDetails({ data }) {
   return (
     <DetailsStyled.PieceWrapper>
       <Widget text="Payment information" />
-      <RowViewInlineText
-        tag="Payment status:"
-        value={PAYMENT_STATUS[data?.paymentStatus]}
-      />
-      <RowViewInlineText
-        tag="Payment mode:"
-        value={PAYMENT_TYPE[data?.paymentType]?.label}
-      />
+      <RowViewInlineText tag="Payment status:" value={PAYMENT_STATUS[data?.paymentStatus]} />
+      <RowViewInlineText tag="Payment mode:" value={PAYMENT_TYPE[data?.paymentType]?.label} />
     </DetailsStyled.PieceWrapper>
   );
 }
 
-function ExtraContent({data}) {
+function ExtraContent({ data }) {
   return (
     <DetailsStyled.PieceWrapper>
       <Widget text="Similar services" />
@@ -126,7 +114,7 @@ function ExtraContent({data}) {
   );
 }
 
-function BottomDetails({data}) {
+function BottomDetails({ data }) {
   return (
     <DetailsStyled.BottomDetails>
       <Button fullWidth>Request cancellation</Button>
@@ -134,16 +122,14 @@ function BottomDetails({data}) {
   );
 }
 
-const Index = ({navigation}) => {
+const Index = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const {loading, selectedBooking, selectedBookingId} = useSelector(
-    (state) => ({
-      loading: state.booking.loading,
-      selectedBooking: state.booking.selectedBooking,
-      selectedBookingId: state.booking.selectedBookingId,
-    }),
-  );
+  const { loading, selectedBooking, selectedBookingId } = useSelector((state) => ({
+    loading: state.booking.loading,
+    selectedBooking: state.booking.selectedBooking,
+    selectedBookingId: state.booking.selectedBookingId,
+  }));
 
   useEffect(() => {
     if (!selectedBookingId) {

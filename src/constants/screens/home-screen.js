@@ -7,8 +7,7 @@ export const home = {
     'https://3gt0nhu0ij8432xn03lq3lff-wpengine.netdna-ssl.com/wp-content/uploads/2015/11/VIGILANT-plumber-fixing-a-sink-shutterstock_132523334-e1448389230378-620x400.jpg',
   electrician:
     'https://www.urdesignmag.com/wordpress/wp-content/uploads/2020/01/what-is-a-union-electrician-2.jpg',
-  tutor:
-    'https://cdn.kinsights.com/cache/8c/3e/8c3ebc224ce7387340d1399b7f22fbf1.jpg',
+  tutor: 'https://cdn.kinsights.com/cache/8c/3e/8c3ebc224ce7387340d1399b7f22fbf1.jpg',
   architect:
     'https://i2.wp.com/theconstructor.org/wp-content/uploads/2017/10/architects-in-construction-600x315.jpg',
   tilesWork:

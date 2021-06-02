@@ -1,12 +1,12 @@
 import React from 'react';
-import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // ICONS
-import {Entypo, Ionicons} from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 
 // STYLES
-import {primaryColor} from '../styles/colors';
+import { primaryColor } from '../styles/colors';
 
 // SCREENS
 import Login from '../screens/Auth';
@@ -22,32 +22,30 @@ import Booking from '../screens/Bookings';
 import BookingDetails from '../screens/Bookings/components/Details';
 
 const MainStackNavigator = () => {
-  const {Navigator, Screen} = createStackNavigator();
+  const { Navigator, Screen } = createStackNavigator();
   const options = {
     initialRouteName: 'Home',
     activeColor: 'tomato',
     inactiveColor: 'black',
-    barStyle: {backgroundColor: '#eee'},
+    barStyle: { backgroundColor: '#eee' },
     shifting: true,
   };
   return (
-    <Navigator
-      initialRouteName="Booking"
-      tabBarOptions={{keyboardHidesTabBar: true}}>
+    <Navigator initialRouteName="Booking" tabBarOptions={{ keyboardHidesTabBar: true }}>
       <Screen
         name="Login"
         component={Login}
-        options={{...options, headerShown: false, tabBarVisible: false}}
+        options={{ ...options, headerShown: false, tabBarVisible: false }}
       />
       <Screen
         name="EmailAuth"
         component={EmailAuth}
-        options={{...options, headerShown: false, tabBarVisible: false}}
+        options={{ ...options, headerShown: false, tabBarVisible: false }}
       />
       <Screen
         name="Home"
         component={TabNavigator}
-        options={{...options, headerShown: false, tabBarVisible: true}}
+        options={{ ...options, headerShown: false, tabBarVisible: true }}
       />
       <Screen
         name="Listing"
@@ -84,12 +82,8 @@ const MainStackNavigator = () => {
           headerShown: true,
           tabBarVisible: true,
           headerTitle: 'Search your location',
-          headerLeft: ({canGoBack, onPress}) => (
-            <HeaderBackButton
-              canGoBack={canGoBack}
-              disabled={!canGoBack}
-              onPress={onPress}
-            />
+          headerLeft: ({ canGoBack, onPress }) => (
+            <HeaderBackButton canGoBack={canGoBack} disabled={!canGoBack} onPress={onPress} />
           ),
         }}
       />
@@ -98,18 +92,16 @@ const MainStackNavigator = () => {
 };
 
 const BookingsNavigator = () => {
-  const {Navigator, Screen} = createStackNavigator();
+  const { Navigator, Screen } = createStackNavigator();
   const options = {
     initialRouteName: 'Booking',
     activeColor: 'tomato',
     inactiveColor: 'black',
-    barStyle: {backgroundColor: '#eee'},
+    barStyle: { backgroundColor: '#eee' },
     shifting: true,
   };
   return (
-    <Navigator
-      initialRouteName="Bookings"
-      tabBarOptions={{keyboardHidesTabBar: true}}>
+    <Navigator initialRouteName="Bookings" tabBarOptions={{ keyboardHidesTabBar: true }}>
       <Screen
         name="Bookings"
         component={Booking}
@@ -118,12 +110,8 @@ const BookingsNavigator = () => {
           headerShown: true,
           tabBarVisible: true,
           headerTitle: 'Bookings',
-          headerLeft: ({canGoBack, onPress}) => (
-            <HeaderBackButton
-              canGoBack={canGoBack}
-              disabled={!canGoBack}
-              onPress={onPress}
-            />
+          headerLeft: ({ canGoBack, onPress }) => (
+            <HeaderBackButton canGoBack={canGoBack} disabled={!canGoBack} onPress={onPress} />
           ),
         }}
       />
@@ -135,12 +123,8 @@ const BookingsNavigator = () => {
           headerShown: true,
           tabBarVisible: true,
           headerTitle: '',
-          headerLeft: ({canGoBack, onPress}) => (
-            <HeaderBackButton
-              canGoBack={canGoBack}
-              disabled={!canGoBack}
-              onPress={onPress}
-            />
+          headerLeft: ({ canGoBack, onPress }) => (
+            <HeaderBackButton canGoBack={canGoBack} disabled={!canGoBack} onPress={onPress} />
           ),
         }}
       />
@@ -149,7 +133,7 @@ const BookingsNavigator = () => {
 };
 
 const TabNavigator = () => {
-  const {Navigator, Screen} = createBottomTabNavigator();
+  const { Navigator, Screen } = createBottomTabNavigator();
   const options = {};
   return (
     <Navigator
@@ -162,7 +146,7 @@ const TabNavigator = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({color, focused, size}) => (
+          tabBarIcon: ({ color, focused, size }) => (
             <Ionicons
               name={focused ? 'md-home-sharp' : 'md-home-outline'}
               size={size}
@@ -175,7 +159,7 @@ const TabNavigator = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({color, focused, size}) => (
+          tabBarIcon: ({ color, focused, size }) => (
             <Ionicons
               name={focused ? 'person-circle-sharp' : 'person-circle-outline'}
               size={size}
@@ -188,4 +172,4 @@ const TabNavigator = () => {
   );
 };
 
-export {MainStackNavigator, TabNavigator};
+export { MainStackNavigator, TabNavigator };

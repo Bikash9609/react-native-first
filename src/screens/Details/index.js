@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Image,
-} from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
-import {Rating} from 'react-native-ratings';
-import {AntDesign} from '@expo/vector-icons';
+import { View, Text, SafeAreaView, ScrollView, StatusBar, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Rating } from 'react-native-ratings';
+import { AntDesign } from '@expo/vector-icons';
 
 import Loader from '../../components/Loader';
 import ServiceItem from '../../components/ServiceItem';
@@ -17,13 +10,10 @@ import Button from '../../components/Button';
 import Carousel from '../../components/carousel/carousel';
 import TextSummary from '../../components/TextSummary';
 
-import {
-  styles,
-  compStyles as cStyles,
-} from '../../styles/screens/details-screen';
-import {useSelector} from 'react-redux';
+import { styles, compStyles as cStyles } from '../../styles/screens/details-screen';
+import { useSelector } from 'react-redux';
 
-const Content = ({type, ...rest}) => {
+const Content = ({ type, ...rest }) => {
   let component = null;
 
   switch (type) {
@@ -46,15 +36,10 @@ const Content = ({type, ...rest}) => {
   return component;
 };
 
-const data = [
-  {title: 'Name'},
-  {title: 'Bikash'},
-  {title: 'Tiwari'},
-  {title: 'New'},
-];
+const data = [{ title: 'Name' }, { title: 'Bikash' }, { title: 'Tiwari' }, { title: 'New' }];
 
-const Index = ({navigation}) => {
-  const {profileDetails, loading, error, services} = useSelector((state) => ({
+const Index = ({ navigation }) => {
+  const { profileDetails, loading, error, services } = useSelector((state) => ({
     profileDetails: state.listing.selectedProfile,
     loading: state.listing.loading,
     error: state.listing.error,
@@ -104,11 +89,7 @@ const Index = ({navigation}) => {
               />
 
               <View style={styles.heartIconWrapper}>
-                <AntDesign
-                  size={29}
-                  name="hearto"
-                  style={styles.rightInfoIcon_svg}
-                />
+                <AntDesign size={29} name="hearto" style={styles.rightInfoIcon_svg} />
               </View>
             </View>
           </View>
@@ -123,9 +104,7 @@ const Index = ({navigation}) => {
             <Content type="title" text="Description" />
             <Content
               type="body"
-              text={
-                <TextSummary string={profileDetails?.bio} longSummary={false} />
-              }
+              text={<TextSummary string={profileDetails?.bio} longSummary={false} />}
             />
           </View>
 
@@ -153,13 +132,11 @@ const Index = ({navigation}) => {
         </ScrollView>
         <LinearGradient
           colors={['#FFA500', '#cc8400']}
-          start={{x: 0.9, y: 0}}
+          start={{ x: 0.9, y: 0 }}
           style={styles.floatingBar}>
           <View style={styles.priceWrapper}>
             <Text style={styles.extraItem}> 1 Item </Text>
-            <Text style={styles.priceNumber}>
-              ₹{parseFloat(profileDetails?.price).toFixed(2)}
-            </Text>
+            <Text style={styles.priceNumber}>₹{parseFloat(profileDetails?.price).toFixed(2)}</Text>
           </View>
           <Button
             boldText

@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {primaryColor} from '../../styles/components/colors';
+import { StyleSheet } from 'react-native';
+import { primaryColor } from '../../styles/components/colors';
 
 export const buttonStyles = StyleSheet.create({
   primary: {

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -7,7 +7,7 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as bookingActions from '../../store/booking/actions';
 
@@ -17,13 +17,7 @@ import Button from '../../components/Button';
 
 import * as BookingStyled from './bookings.styled';
 
-export const FooterComponent = ({
-  hidePrevious,
-  hideNext,
-  onNextPage,
-  loading,
-  isLastPage,
-}) => {
+export const FooterComponent = ({ hidePrevious, hideNext, onNextPage, loading, isLastPage }) => {
   const loadMoreButton = (
     <Button fullWidth onPress={onNextPage}>
       Load more
@@ -32,9 +26,7 @@ export const FooterComponent = ({
   const loadPreviousButton = <Button fullWidth>Previous</Button>;
 
   let component = (
-    <Text style={{padding: 10, textAlign: 'center', color: '#000000a1'}}>
-      No more bookings
-    </Text>
+    <Text style={{ padding: 10, textAlign: 'center', color: '#000000a1' }}>No more bookings</Text>
   );
 
   if (!loading && !isLastPage) {
@@ -48,18 +40,16 @@ export const FooterComponent = ({
   return <BookingStyled.FooterWrapper>{component}</BookingStyled.FooterWrapper>;
 };
 
-export default function Index({navigation}) {
+export default function Index({ navigation }) {
   const dispatch = useDispatch();
 
-  const {loading, error, allBookings, pageNo, listEndPage} = useSelector(
-    (state) => ({
-      loading: state.booking.loading,
-      error: state.booking.error,
-      allBookings: state.booking.allBookings,
-      pageNo: state.booking.pageNo,
-      listEndPage: state.booking.listEndPage,
-    }),
-  );
+  const { loading, error, allBookings, pageNo, listEndPage } = useSelector((state) => ({
+    loading: state.booking.loading,
+    error: state.booking.error,
+    allBookings: state.booking.allBookings,
+    pageNo: state.booking.pageNo,
+    listEndPage: state.booking.listEndPage,
+  }));
 
   const fetchBookings = useCallback(
     (refresh) => {
@@ -75,11 +65,11 @@ export default function Index({navigation}) {
 
   const onCardPress = (data) => {
     dispatch(bookingActions.fetchBookingById(data._id));
-    navigation.navigate('Booking Details', {data});
+    navigation.navigate('Booking Details', { data });
   };
 
   const renderBookingItems = useCallback(
-    ({item}) => <ItemCard onCardPress={() => onCardPress(item)} data={item} />,
+    ({ item }) => <ItemCard onCardPress={() => onCardPress(item)} data={item} />,
     [allBookings],
   );
 
@@ -93,10 +83,7 @@ export default function Index({navigation}) {
       <StatusBar barStyle="dark-content" />
       <FlatList
         refreshControl={
-          <RefreshControl
-            refreshing={loading}
-            onRefresh={() => fetchBookings(true)}
-          />
+          <RefreshControl refreshing={loading} onRefresh={() => fetchBookings(true)} />
         }
         refreshing={loading}
         keyExtractor={(item) => item._id}
@@ -105,11 +92,7 @@ export default function Index({navigation}) {
         showsVerticalScrollIndicator={false}
         extraData={allBookings}
         ListFooterComponent={
-          <FooterComponent
-            isLastPage={isLastPage}
-            loading={loading}
-            onNextPage={onLoadMore}
-          />
+          <FooterComponent isLastPage={isLastPage} loading={loading} onNextPage={onLoadMore} />
         }
       />
     </SafeAreaView>
