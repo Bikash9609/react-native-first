@@ -31,7 +31,7 @@ const MainStackNavigator = () => {
     shifting: true,
   };
   return (
-    <Navigator initialRouteName="Booking" tabBarOptions={{ keyboardHidesTabBar: true }}>
+    <Navigator initialRouteName="Listing" tabBarOptions={{ keyboardHidesTabBar: true }}>
       <Screen
         name="Login"
         component={Login}
